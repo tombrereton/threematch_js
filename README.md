@@ -75,7 +75,7 @@ removes the column.
 
 ## Python version
 
-This is a ported version of the python game at this link: [threematch](github.com/tombrereton/threematch)
+This is a ported version of the python game at this link: [threematch](https://github.com/tombrereton/threematch)
 
 ## Authors
 
