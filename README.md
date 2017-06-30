@@ -13,48 +13,6 @@ Game rules are detailed below.
   <img src="https://i.imgur.com/2j0mG6i.png">
 </p>
 
-## Getting Started
-
-### Prerequisites
-
-Pygame - install via pip
-
-Python 3.x - install via website or your computer's package manager
-
-Once Python 3 is installed, install pygame
-```
-pip install pygame
-```
-
-or on some machines
-```
-pip3 install pygame
-```
-
-### Installing
-
-To install Gem Island clone the repository to your home directory or wherever you prefer, then run main.py with python.
-
-1. Clone repo: 
-```
-cd ~/
-git clone https://github.com/tombrereton/threematch.git
-```
-
-2. Run Gem Island
-```
-cd ~/threematch
-python main.py
-```
-or
-```
-cd ~/threematch
-python3 main.py
-```
-
-3. Depending on if you have a HiDPi screen or not, you can change the `HD_SCALE` variable
-in `global_variables.py` under the GUI variables section. Recommended values are between and including 1 and 3.
-
 ## Game Rules
 
 #### Gem Types
@@ -75,31 +33,9 @@ removes the column.
 * An intersection of a vertical and horizontal match earns you a diamond bonus.
 * If a match generates multiple bonuses only one is generated following the hierarchy: star, cross, bonus.
 
-## Running tests
+## Python version
 
-Pytest is required to run the tests.
- 
-To install pytest use pip:
-
-1. Install pytest
-```
-pip install pytest
-```
-
-2. Run pytest 
-
-To run the test change into the threematch directory and run pytest.
-You need to run pytest as a python command so that it adds the current directory to PYTHONPATH.
-```
-cd ~/threematch
-python -m pytest
-```
-
-## Style guide
-
-Refer to the pep-8 website for a consistent style.
-
-[https://www.python.org/dev/peps/pep-0008/](https://www.python.org/dev/peps/pep-0008/)
+This is a ported version of the python game at this link: [threematch](github.com/tombrereton/threematch)
 
 ## Authors
 
