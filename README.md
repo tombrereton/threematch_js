@@ -13,6 +13,46 @@ Game rules are detailed below.
   <img src="https://i.imgur.com/2j0mG6i.png">
 </p>
 
+## Getting Started
+
+To run this with a simple python server:
+
+### Prerequisites
+
+httpserver -  install via pip
+
+Python 3.x - install via website or your computer's package manager
+
+Once Python 3 is installed, install pygame
+```
+pip install httpserver
+```
+
+or on some machines
+```
+pip3 install httpserver
+```
+
+### Installing
+
+To install Gem Island clone the repository to your home directory or wherever you prefer, then start a server with python and go to localhost in your browser.
+
+1. Clone repo: 
+```
+cd ~/
+git clone https://github.com/tombrereton/threematch_js.git
+```
+
+2. Start server
+```
+cd ~/threematch_js
+python -m http.server
+```
+3. Open game in browser and type in the url bar
+```
+localhost:8000
+```
+
 ## Game Rules
 
 #### Gem Types
