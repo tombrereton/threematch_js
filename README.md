@@ -23,7 +23,7 @@ httpserver -  install via pip
 
 Python 3.x - install via website or your computer's package manager
 
-Once Python 3 is installed, install pygame
+Once Python 3 is installed, install httpserver if it is not installed.
 ```
 pip install httpserver
 ```
