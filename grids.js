@@ -266,7 +266,6 @@ function removeMedal(row, col) {
     game.world.bringToTop(removedMedalGroup);
 
     // on complete
-    console.log('removingMedal');
     medalSprite.events.onAnimationComplete.add(killSprite);
 
     medalSprite.scale.setTo(2);

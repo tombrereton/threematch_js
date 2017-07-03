@@ -197,16 +197,15 @@ function removeGems() {
         var c = removals[i].x;
 
         var gemSprite = gemArray[r][c].gemSprite;
-        var gemTween = game.add.tween(gemSprite).to({alpha: 0}, GEM_FADE_SPEED, Phaser.Easing.Linear.None, true);
+        gemSprite.events.onAnimationComplete.add(killGem);
+        gemSprite.play('explode', 30, false, true);
 
         removeIce(r, c);
 
-        gemTween.onComplete.add(function (gem) {
-            gem.kill();
+        function killGem() {
             removing--;
             cascadeLoop();
-        });
-
+        }
 
         // set grid spot to empty
         gemArray[r][c] = -1;
@@ -233,10 +232,10 @@ function addBonuses() {
 
         // make new bonus shake
         var bonusSprite = gemArray[r][c].gemSprite;
-        var bonusTween = game.add.tween(bonusSprite).to({x: bonusSprite.position.x + 5}, SHAKE_SPEED/4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
-        var bonusTween2 = game.add.tween(bonusSprite).to({x: bonusSprite.position.x - 5}, SHAKE_SPEED/4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
-        var bonusTween3 = game.add.tween(bonusSprite).to({x: bonusSprite.position.x + 5}, SHAKE_SPEED/4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
-        var bonusTween4 = game.add.tween(bonusSprite).to({x: bonusSprite.position.x - 5}, SHAKE_SPEED/4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
+        var bonusTween = game.add.tween(bonusSprite).to({x: bonusSprite.position.x + 5}, SHAKE_SPEED / 4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
+        var bonusTween2 = game.add.tween(bonusSprite).to({x: bonusSprite.position.x - 5}, SHAKE_SPEED / 4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
+        var bonusTween3 = game.add.tween(bonusSprite).to({x: bonusSprite.position.x + 5}, SHAKE_SPEED / 4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
+        var bonusTween4 = game.add.tween(bonusSprite).to({x: bonusSprite.position.x - 5}, SHAKE_SPEED / 4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
         bonusTween.chain(bonusTween2);
         bonusTween2.chain(bonusTween3);
         bonusTween3.chain(bonusTween4);
