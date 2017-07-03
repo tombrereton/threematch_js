@@ -26,7 +26,7 @@ function gemSelect(e) {
                 oldRow = newRow;
                 oldCol = newCol;
                 swapLocations = [[newRow, newCol], [oldRow, oldCol]];
-                // game.input.addMoveCallback(gemMove);
+                game.input.addMoveCallback(gemMove);
             }
             else {
                 swapLocations = [[newRow, newCol], [oldRow, oldCol]];
@@ -105,6 +105,7 @@ function gemMove(event, pX, pY) {
         var distY = pY - selectedOrb.gemSprite.y;
         var deltaRow = 0;
         var deltaCol = 0;
+        console.log(distX, distY, deltaRow, deltaCol);
         if (Math.abs(distX) > CELL / 2) {
             if (distX > 0) {
                 deltaCol = 1;
@@ -125,12 +126,12 @@ function gemMove(event, pX, pY) {
         if (deltaRow + deltaCol !== 0) {
             var pickedOrb = gemAt(getGemRow(selectedOrb) + deltaRow, getGemCol(selectedOrb) + deltaCol);
             if (pickedOrb !== -1) {
+                game.input.deleteMoveCallback(gemMove);
                 // selectedOrb.gemSprite.scale.setTo(1);
                 selectedOrb.gemSprite.width = SPRITE_SIZE;
                 selectedOrb.gemSprite.height = SPRITE_SIZE;
                 swapGems(selectedOrb, pickedOrb, true);
                 // game.input.deleteMoveCallback(gemMove);
-                game.input.deleteMoveCallback(gemMove);
             }
         }
     }
@@ -243,7 +244,7 @@ function addBonuses() {
         })
     }
     updateScore();
-    checkWin();
+    // checkWin();
     bonuses = []
 }
 
@@ -289,6 +290,7 @@ function addGemsAbove() {
             // on tween complete try finding more matches
             gemTween.onComplete.add(function () {
                 moving--;
+                checkWin();
                 initialHandling();
             });
 
