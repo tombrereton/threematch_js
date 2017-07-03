@@ -351,12 +351,11 @@ function cascadeLoop() {
         removalsObArray = objectArray();
         breakingFromRow = cascade(breakingFromRow, flip);
         breakingFromColumn = cascade(breakingFromColumn, !flip);
-        console.log(breakingFromColumn);
-        console.log(breakingFromRow);
         flip = !flip;
         flattenArrays();
         removeGems();
         addBonuses();
+        cascadeLoop();
     } else {
         // freeMedals();
         pullDown();
@@ -364,6 +363,7 @@ function cascadeLoop() {
         addGemsAbove();
         findMatchesResult = findMatches();
         CASCADE++;
+        initialHandling();
     }
 }
 
