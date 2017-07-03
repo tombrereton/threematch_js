@@ -26,6 +26,7 @@ function MedalObject(portion, medalSpite) {
 
 function initMedalGrid(medals, medalGroup) {
     emptyGrid(medalArray);
+    emptyGrid(medalState);
 
     var i = 0;
     while (i < medals) {
@@ -44,15 +45,19 @@ function initMedalGrid(medals, medalGroup) {
 function initIceGrid(iceGroup) {
     emptyGrid(iceArray);
 
-    for (var i = (ROWS - ICE_ROWS); i < ROWS; i++) {
+    for (var i = 0; i < ROWS; i++) {
         for (var j = 0; j < COLS; j++) {
 
-            // create ice
-            var ice = createIceSprite(i, j);
-            iceGroup.add(ice);
+            if (i >= (ROWS - ICE_ROWS)) {
+                // create ice
+                var ice = createIceSprite(i, j);
+                iceGroup.add(ice);
 
-            // add object to gemArray entry
-            iceArray[i][j] = new IceObject(ICE_LAYERS, ice);
+                // add object to gemArray entry
+                iceArray[i][j] = new IceObject(ICE_LAYERS, ice);
+            } else {
+                iceArray[i][j] = new IceObject(-1, null);
+            }
         }
     }
 
@@ -83,6 +88,7 @@ function initGemGrid(spriteGroup) {
     }
     selectedOrb = null;
 }
+
 
 // =========================================================
 // Initialise helper methods
@@ -319,4 +325,32 @@ function getProgressState() {
     var progress = medalsUncovered.valueOf() + '\t' + SCORE.valueOf() + '\t' + action;
 
     return progress;
+}
+
+function getGameState() {
+    var gameState = '';
+
+    for (var i = 0; i < ROWS; i++) {
+        for (var j = 0; j < COLS; j++) {
+            var s = gemArray[i][j].gemType + '\t' + gemArray[i][j].bonusType + '\t';
+
+            var ice = -1;
+            if (iceArray[i][j] !== -1) {
+                ice = iceArray[i][j].layer;
+            }
+
+            var m = '-1';
+            if (medalState[i][j] !== -1) {
+                m = medalState[i][j];
+            } else if (iceArray[i][j] === -1 && medalArray[i][j] !== -1) {
+                m = medalArray[i][j].portion;
+                medalState[i][j] = m;
+            }
+
+            s = s + ice + '\t' + m + '\t';
+            gameState += s;
+        }
+    }
+
+    return gameState;
 }

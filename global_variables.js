@@ -63,6 +63,7 @@ var removedMedalGroup;
 var gemArray = [];
 var iceArray = [];
 var medalArray = [];
+var medalState = [];
 
 // on screen text variables
 var score = 0;
