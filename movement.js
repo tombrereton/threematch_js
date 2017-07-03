@@ -105,7 +105,6 @@ function gemMove(event, pX, pY) {
         var distY = pY - selectedOrb.gemSprite.y;
         var deltaRow = 0;
         var deltaCol = 0;
-        console.log(distX, distY, deltaRow, deltaCol);
         if (Math.abs(distX) > CELL / 2) {
             if (distX > 0) {
                 deltaCol = 1;
@@ -124,14 +123,19 @@ function gemMove(event, pX, pY) {
             }
         }
         if (deltaRow + deltaCol !== 0) {
-            var pickedOrb = gemAt(getGemRow(selectedOrb) + deltaRow, getGemCol(selectedOrb) + deltaCol);
+            newRow = getGemRow(selectedOrb);
+            newCol = getGemCol(selectedOrb);
+            var pickedOrb = gemAt(newRow + deltaRow, newCol + deltaCol);
             if (pickedOrb !== -1) {
+                oldRow = getGemRow(pickedOrb);
+                oldCol = getGemCol(pickedOrb);
+                console.log(newRow, newCol);
+                console.log(oldRow, oldCol);
+                swapLocations = [[newRow, newCol], [oldRow, oldCol]];
                 game.input.deleteMoveCallback(gemMove);
-                // selectedOrb.gemSprite.scale.setTo(1);
                 selectedOrb.gemSprite.width = SPRITE_SIZE;
                 selectedOrb.gemSprite.height = SPRITE_SIZE;
                 swapGems(selectedOrb, pickedOrb, true);
-                // game.input.deleteMoveCallback(gemMove);
             }
         }
     }
@@ -347,6 +351,8 @@ function cascadeLoop() {
         removalsObArray = objectArray();
         breakingFromRow = cascade(breakingFromRow, flip);
         breakingFromColumn = cascade(breakingFromColumn, !flip);
+        console.log(breakingFromColumn);
+        console.log(breakingFromRow);
         flip = !flip;
         flattenArrays();
         removeGems();
