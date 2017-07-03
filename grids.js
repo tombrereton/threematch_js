@@ -309,3 +309,5 @@ function addGem(row, col, gemType, bonusType) {
 
 }
 
+function getProgressState(){
+}
