@@ -233,11 +233,19 @@ function addBonuses() {
 
         // make new bonus shake
         var bonusSprite = gemArray[r][c].gemSprite;
-        var bonusTween = game.add.tween(bonusSprite).to({x: bonusSprite.position.x + SHAKE_RADIUS}, SHAKE_SPEED, function (k) {
-            return wiggle(k, SHAKE_PERIOD1, SHAKE_PERIOD2);
-        }, true);
+        var bonusTween = game.add.tween(bonusSprite).to({x: bonusSprite.position.x + 5}, SHAKE_SPEED/4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
+        var bonusTween2 = game.add.tween(bonusSprite).to({x: bonusSprite.position.x - 5}, SHAKE_SPEED/4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
+        var bonusTween3 = game.add.tween(bonusSprite).to({x: bonusSprite.position.x + 5}, SHAKE_SPEED/4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
+        var bonusTween4 = game.add.tween(bonusSprite).to({x: bonusSprite.position.x - 5}, SHAKE_SPEED/4, Phaser.Easing.Bounce.InOut, false, 0, 0, true);
+        bonusTween.chain(bonusTween2);
+        bonusTween2.chain(bonusTween3);
+        bonusTween3.chain(bonusTween4);
+        bonusTween.start();
+        // var bonusTween = game.add.tween(bonusSprite).to({x: bonusSprite.position.x + SHAKE_RADIUS}, SHAKE_SPEED, function (k) {
+        //     return wiggle(k, SHAKE_PERIOD1, SHAKE_PERIOD2);
+        // }, true);
 
-        bonusTween.onComplete.add(function () {
+        bonusTween4.onComplete.add(function () {
             removing--;
             // freeMedals();
             cascadeLoop();

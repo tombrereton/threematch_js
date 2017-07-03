@@ -41,7 +41,7 @@ var FALL_ANIMATION = Phaser.Easing.Linear.None;
 var CASCADE = 1;
 var removalsBonusesCount;
 var SHAKE_RADIUS = 8;
-var SHAKE_SPEED = 500;
+var SHAKE_SPEED = 200;
 var SHAKE_PERIOD1 = 500;
 var SHAKE_PERIOD2 = 500;
 var flipLineBreak = true;
