@@ -137,9 +137,9 @@ function gemMove(event, pX, pY) {
 }
 
 function updateScore() {
-    score += 100 * CASCADE * (removals.length + bonuses.length + 2 * bonusesRemoved + 5 * tempMedalFreed);
+    SCORE += 100 * CASCADE * (removals.length + bonuses.length + 2 * bonusesRemoved + 5 * tempMedalFreed);
     tempMedalFreed = 0;
-    var scoreT = ("        " + score).slice(-8);
+    var scoreT = ("        " + SCORE).slice(-8);
     scroreT = 'Score: ' + scoreT;
     scoreText.setText(scroreT);
 }
@@ -372,12 +372,12 @@ function checkWin() {
 }
 
 function extrapolateScore() {
-    avgPerMove = score / (TOTAL_MOVES - MOVES_LEFT);
-    bonusPoints = avgPerMove * MOVES_LEFT;
+    avgPerMove = SCORE / (TOTAL_MOVES - MOVES_LEFT);
+    bonusPoints = Math.floor(avgPerMove * MOVES_LEFT);
 
-    score += bonusPoints;
+    SCORE += bonusPoints;
     tempMedalFreed = 0;
-    var scoreT = ("        " + score).slice(-8);
+    var scoreT = ("        " + SCORE).slice(-8);
     scroreT = 'Score: ' + scoreT;
     scoreText.setText(scroreT);
 }

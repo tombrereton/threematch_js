@@ -309,5 +309,14 @@ function addGem(row, col, gemType, bonusType) {
 
 }
 
-function getProgressState(){
+function getProgressState() {
+    var medalsUncovered = LEVEL_1_TOTAL_MEDALS - medalLeft;
+    var score = SCORE;
+    var action = swapLocations;
+
+    action = action[0][0].valueOf() + '-' + action[0][1] + '-' + action[1][0] + '-' + action[1][1];
+
+    var progress = medalsUncovered.valueOf() + '\t' + SCORE.valueOf() + '\t' + action;
+
+    return progress;
 }

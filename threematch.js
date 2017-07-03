@@ -17,10 +17,6 @@ function preload() {
 
     // sprite atlas
     game.load.atlasJSONArray('threematch', 'assets/threematch.png', 'assets/threematch.json');
-
-    // old
-    game.load.image('star', 'assets/star.png');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 }
 
 
@@ -58,7 +54,7 @@ function create() {
     // our controls
     cursors = game.input.keyboard.createCursorKeys();
 
-    // setup up score text
+    // setup up SCORE text
     var scroreT = ("        " + 0).slice(-8);
     var movesT = ("      " + 20).slice(-6);
     var medalsT = ("      " + 3).slice(-6);

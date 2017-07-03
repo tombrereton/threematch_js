@@ -69,5 +69,5 @@ var score = 0;
 var medalLeft = LEVEL_1_TOTAL_MEDALS;
 var tempMedalFreed = 0;
 
-// highscore should read in high score from file
+// highscore should read in high SCORE from file
 var highScore = 0;
