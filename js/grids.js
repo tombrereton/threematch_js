@@ -195,26 +195,6 @@ function createIceSprite(row, col) {
     return ice;
 }
 
-function removeGem(row, col) {
-    var gemSprite = gemArray[row][col].gemSprite;
-    // var gemTween = game.add.tween(gemSprite).to({alpha: 0}, GEM_FADE_SPEED, Phaser.Easing.Linear.None, true, CASCADE * FALL_SPEED, 0, false);
-
-    gemArray[row][col].gemSprite.kill();
-    gemArray[row][col] = -1;
-    // gemTween.onComplete.add(function () {
-    //     // gemSprite.events.onAnimationComplete.add(killGem);
-    //     // gemSprite.play('explode');
-    //     gemArray[row][col].gemSprite.kill();
-    //     gemArray[row][col] = -1;
-    // });
-
-    function killGem() {
-        gemArray[row][col].gemSprite.kill();
-        gemArray[row][col] = -1;
-    }
-
-
-}
 
 function removeIce(row, col) {
     if (iceArray[row][col] !== -1) {
