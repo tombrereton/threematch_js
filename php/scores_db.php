@@ -3,8 +3,8 @@
 // uncomment line in php.ini where it has php-pgsql
 $host = 'localhost';
 $port = '5432';
-$dbname = 'postgres';
-$user = 'postgres';
+$dbname = 'tom';
+$user = 'tom';
 $db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=Fanta");
 
 function insertScore($nickname, $score, $gameID)
