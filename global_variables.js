@@ -22,8 +22,18 @@ var w = window,
     g = d.getElementsByTagName('body')[0],
     windowWidth = w.innerWidth || e.clientWidth || g.clientWidth,
     windowHeight = w.innerHeight || e.clientHeight || g.clientHeight;
-var HEIGHT = Math.min(600, windowHeight);// * w.devicePixelRatio;
-var WIDTH = Math.min(450, windowWidth);//* w.devicePixelRatio;
+
+// WIDTH
+var WIDTH;
+if (windowWidth > 900) {
+    WIDTH = Math.min(450, windowWidth / 4);//* w.devicePixelRatio;
+} else {
+    WIDTH = Math.min(450, windowWidth);//* w.devicePixelRatio;
+}
+
+// var HEIGHT = Math.min(600, windowHeight); /* * w.devicePixelRatio;*/
+var HEIGHT = WIDTH * 4 / 3;
+/* * w.devicePixelRatio;*/
 var CELL = (WIDTH - WIDTH / 50) / COLS;
 var MARGIN_H = (WIDTH - (COLS * CELL)) / 2;
 var MARGIN_V = HEIGHT / 64;
@@ -71,4 +81,4 @@ var medalLeft = LEVEL_1_TOTAL_MEDALS;
 var tempMedalFreed = 0;
 
 
-var gameID = (new Date()).getTime() + '-' +  Math.floor(Math.random() * 1E16);
+var gameID = (new Date()).getTime() + '-' + Math.floor(Math.random() * 1E16);
