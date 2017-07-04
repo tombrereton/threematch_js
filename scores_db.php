@@ -53,15 +53,6 @@ function getUserHighscore($nickname)
     return $tableString;
 }
 
-//=============================================================
-
-//insertScore('Gary', 13213, '1108230890-128302180942');
-////echo getHighScores();
-//
-//$name = 'Gary';
-//print_r(getUserHighscore($name));
-//=============================================================
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['operationType'] == 'getHighScores') {
         echo getHighScores();
@@ -69,8 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo getUserHighscore($_POST['nickname']);
     }
 }
-
-//echo getUserHighscore('Sam');
 
 pg_close($db);
 
