@@ -53,6 +53,7 @@ function create() {
     // add functions for clicking on gems
     game.input.onDown.add(gemSelect);
     game.input.onUp.add(gemDeselect);
+    game.input.onTap.add(gemSelect);
 
     // setup up SCORE text
     var scroreT = ("        " + 0).slice(-8);
