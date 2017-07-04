@@ -23,15 +23,19 @@ function getHighScores()
     $tableString = '';
 
     $rank = 1;
-    foreach ($arr as $row) {
-        #
-        $tableString .= "\t<tr>\n";
-        $tableString .=
-            "\t\t<td>" . $rank . "</td>\n"
-            . "\t\t<td>" . $row['nickname'] . "</td>\n"
-            . "\t\t<td align='right'>" . $row['score'] . "</td>\n";
-        $tableString .= "\t</tr>\n";
-        $rank++;
+
+    if ($arr) {
+        foreach ($arr as $row) {
+            $tableString .= "\t<tr>\n";
+            $tableString .=
+                "\t\t<td>" . $rank . "</td>\n"
+                . "\t\t<td>" . $row['nickname'] . "</td>\n"
+                . "\t\t<td align='right'>" . $row['score'] . "</td>\n";
+            $tableString .= "\t</tr>\n";
+            $rank++;
+        }
+    } else {
+        $tableString = "<tr><td></td><td>None</td><td></td></tr>";
     }
 
     return $tableString;
@@ -47,12 +51,16 @@ function getUserHighscore($nickname)
     $arr = pg_fetch_all($result);
 
     $tableString = '';
-    $tableString .= "\t<tr>\n";
-    $tableString .=
-        "\t\t<td>" . $arr[0]['rank'] . "</td>\n"
-        . "\t\t<td>" . $arr[0]['nickname'] . "</td>\n"
-        . "\t\t<td align='right'>" . $arr[0]['max'] . "</td>\n";
-    $tableString .= "\t</tr>\n";
+    if ($arr) {
+        $tableString .= "\t<tr>\n";
+        $tableString .=
+            "\t\t<td>" . $arr[0]['rank'] . "</td>\n"
+            . "\t\t<td>" . $arr[0]['nickname'] . "</td>\n"
+            . "\t\t<td align='right'>" . $arr[0]['max'] . "</td>\n";
+        $tableString .= "\t</tr>\n";
+    } else {
+        $tableString = "<tr><td></td><td>None</td><td></td></tr>";
+    }
 
     return $tableString;
 }
