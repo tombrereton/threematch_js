@@ -158,7 +158,7 @@ function moveMade() {
 
 function decrementMedalCount() {
     medalLeft--;
-    checkWin();
+    // checkWin();
     var medalsT = ("      " + medalLeft).slice(-6);
     medalsT = 'Medals: ' + medalsT;
     medalsText.setText(medalsT);
@@ -301,7 +301,7 @@ function addGemsAbove() {
             // on tween complete try finding more matches
             gemTween.onComplete.add(function () {
                 moving--;
-                checkWin();
+                // checkWin();
                 initialHandling();
             });
 
@@ -330,24 +330,30 @@ function handleMatches() {
 
 function initialHandling() {
     if (0 !== moving) {
+        // Gems still moving
         return;
     } else if (findMatchesResult) {
+        // Matches exist
         findBonuses();
         findBreaking();
         flip = true;
         cascadeLoop();
     } else {
+        // No matches exist
         canPick = true;
         selectedOrb = null;
+        checkWin();
+        sendData(gameID, getProgressState());
+        sendData(gameID, getGameState());
     }
 }
 
 function cascadeLoop() {
     if (0 !== removing) {
-        // freeMedals();
+        // Breaking still animating
         return;
     } else if (obArrayNonEmpty(breakingFromRow) || obArrayNonEmpty(breakingFromColumn)) {
-        // freeMedals();
+        // More gems to break due to bonuses
         removalsObArray = objectArray();
         breakingFromRow = cascade(breakingFromRow, flip);
         breakingFromColumn = cascade(breakingFromColumn, !flip);
@@ -357,7 +363,7 @@ function cascadeLoop() {
         addBonuses();
         cascadeLoop();
     } else {
-        // freeMedals();
+        // All gems broken
         pullDown();
         moveGems();
         addGemsAbove();

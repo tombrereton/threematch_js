@@ -6,6 +6,8 @@ var stars;
 var score = 0;
 var scoreText;
 
+var gameID = (new Date()).getTime() + '-' +  Math.floor(Math.random() * 1E16);
+
 // the game
 var game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, 'game',
     {preload: preload, create: create, update: update});
@@ -45,14 +47,13 @@ function create() {
     initIceGrid(iceGroup);
     initGemGrid(gemGroup);
 
+    startFile(gameID);
+    sendData(gameID, 'start');
+    sendData(gameID, getGameState());
+
     // add functions for clicking on gems
     game.input.onDown.add(gemSelect);
     game.input.onUp.add(gemDeselect);
-
-
-    // OLD STUFF BELOW
-    // our controls
-    cursors = game.input.keyboard.createCursorKeys();
 
     // setup up SCORE text
     var scroreT = ("        " + 0).slice(-8);
