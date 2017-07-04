@@ -11,8 +11,14 @@ function sendData(gameID, dataString) {
 }
 
 function sendScore(nickname, gameID, score) {
-    $.post('high_scores.php', {nickname: nickname, gameID: gameID, score: score}, function (data, state) {
-        console.log(data);
+    $.post('scores_db.php', {
+        operationType: 'sendScore',
+        nickname: nickname,
+        gameID: gameID,
+        score: score
+    }, function (data, state) {
+        updateUserScore(nickname);
+        updateHighScores()
     });
 }
 

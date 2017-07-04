@@ -58,6 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo getHighScores();
     } elseif ($_POST['operationType'] == 'getUserScore') {
         echo getUserHighscore($_POST['nickname']);
+    } elseif ($_POST['operationType'] == 'sendScore') {
+        $nickname = $_POST['nickname'];
+        $score = $_POST['score'];
+        $gameID = $_POST['gameID'];
+        insertScore($nickname, $score, $gameID);
     }
 }
 

@@ -382,6 +382,7 @@ function checkWin() {
             fill: '#000'
         });
         winText.anchor.setTo(0.5, 0.5);
+        sendScore(nickName, gameID, SCORE);
     } else if (MOVES_LEFT === 0) {
         TERMINATED = true;
         var winText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over', {
@@ -389,6 +390,7 @@ function checkWin() {
             fill: '#000'
         });
         winText.anchor.setTo(0.5, 0.5);
+        sendScore(nickName, gameID, SCORE);
     }
 }
 

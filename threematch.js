@@ -6,7 +6,6 @@ var stars;
 var score = 0;
 var scoreText;
 
-var gameID = (new Date()).getTime() + '-' +  Math.floor(Math.random() * 1E16);
 
 // the game
 var game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, 'game',

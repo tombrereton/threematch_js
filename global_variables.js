@@ -6,7 +6,6 @@ var COLS = 9;
 var LEVEL_1_TOTAL_MEDALS = 3
 var LEVEL_2_TOTAL_MEDALS = 4
 var LEVEL_3_TOTAL_MEDALS = 5
-var SCORE = 0
 var TOTAL_MOVES = 20;
 var MOVES_LEFT = 20;
 var GEM_TYPES = 6
@@ -66,9 +65,10 @@ var medalArray = [];
 var medalState = [];
 
 // on screen text variables
-var score = 0;
+// var score = 0;
+var SCORE = 0;
 var medalLeft = LEVEL_1_TOTAL_MEDALS;
 var tempMedalFreed = 0;
 
-// highscore should read in high SCORE from file
-var highScore = 0;
+
+var gameID = (new Date()).getTime() + '-' +  Math.floor(Math.random() * 1E16);
