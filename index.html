@@ -93,7 +93,7 @@
 
 <script>
     var nickName = null;
-    while (nickName === null) {
+    while (nickName === null || nickName === '') {
         nickName = prompt('Please enter your nickname for scoring:')
     }
     updateUserScore(nickName);

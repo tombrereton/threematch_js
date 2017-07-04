@@ -129,8 +129,6 @@ function gemMove(event, pX, pY) {
             if (pickedOrb !== -1) {
                 oldRow = getGemRow(pickedOrb);
                 oldCol = getGemCol(pickedOrb);
-                console.log(newRow, newCol);
-                console.log(oldRow, oldCol);
                 swapLocations = [[newRow, newCol], [oldRow, oldCol]];
                 game.input.deleteMoveCallback(gemMove);
                 selectedOrb.gemSprite.width = SPRITE_SIZE;

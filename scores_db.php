@@ -1,4 +1,6 @@
 <?php
+// requires php-pgsql
+// uncomment line in php.ini where it has php-pgsql
 $host = 'localhost';
 $port = '5432';
 $dbname = 'tom';
@@ -7,8 +9,9 @@ $db = pg_connect("host=$host port=$port dbname=$dbname user=$user");
 
 function insertScore($nickname, $score, $gameID)
 {
-    $query = "INSERT INTO scores (nickname, score, game_id) VALUES ('$nickname', $score, '$gameID')";
-    $result = pg_query($query);
+    global $db;
+    $result = pg_prepare($db, 'insertScore', "INSERT INTO scores (nickname, score, game_id) VALUES ($1,$2,$3)");
+    $result = pg_execute($db, 'insertScore', array($nickname, $score, $gameID));
 }
 
 function getHighScores()
@@ -26,7 +29,7 @@ function getHighScores()
         $tableString .=
             "\t\t<td>" . $rank . "</td>\n"
             . "\t\t<td>" . $row['nickname'] . "</td>\n"
-            . "\t\t<td>" . $row['score'] . "</td>\n";
+            . "\t\t<td align='right'>" . $row['score'] . "</td>\n";
         $tableString .= "\t</tr>\n";
         $rank++;
     }
@@ -36,9 +39,10 @@ function getHighScores()
 
 function getUserHighscore($nickname)
 {
-    $query = "SELECT rank, nickname, max FROM (SELECT ROW_NUMBER() OVER(ORDER BY max DESC) AS rank, nickname, max FROM"
-        . "(SELECT nickname, MAX(score) FROM scores GROUP BY nickname) AS max_scores) AS ranked_max_score WHERE nickname='$nickname'";
-    $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+    global $db;
+    $result = pg_prepare($db, 'userHighScore', "SELECT rank, nickname, max FROM (SELECT ROW_NUMBER() OVER(ORDER BY max DESC) AS rank, nickname, max FROM"
+        . "(SELECT nickname, MAX(score) FROM scores GROUP BY nickname) AS max_scores) AS ranked_max_score WHERE nickname=$1");
+    $result = pg_execute($db, 'userHighScore', array($nickname));
 
     $arr = pg_fetch_all($result);
 
@@ -47,7 +51,7 @@ function getUserHighscore($nickname)
     $tableString .=
         "\t\t<td>" . $arr[0]['rank'] . "</td>\n"
         . "\t\t<td>" . $arr[0]['nickname'] . "</td>\n"
-        . "\t\t<td>" . $arr[0]['max'] . "</td>\n";
+        . "\t\t<td align='right'>" . $arr[0]['max'] . "</td>\n";
     $tableString .= "\t</tr>\n";
 
     return $tableString;
