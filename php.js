@@ -15,3 +15,15 @@ function sendScore(nickname, gameID, score) {
         console.log(data);
     });
 }
+
+function updateHighScores() {
+    $.post('scores_db.php', {operationType: 'getHighScores'}, function (data, state) {
+        document.getElementById('highscores').innerHTML = data;
+    });
+}
+
+function updateUserScore(nickname) {
+    $.post('scores_db.php', {operationType: 'getUserScore', nickname: nickname}, function (data, state) {
+        document.getElementById('userHighScore').innerHTML = data;
+    });
+}
