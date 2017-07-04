@@ -27,6 +27,7 @@ function MedalObject(portion, medalSpite) {
 function initMedalGrid(medals, medalGroup) {
     emptyGrid(medalArray);
     emptyGrid(medalState);
+    medalLocations = [];
 
     var i = 0;
     while (i < medals) {

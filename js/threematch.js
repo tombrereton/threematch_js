@@ -10,6 +10,7 @@ function preload() {
     // background
     game.load.image('stone', 'assets/stone_light_2.jpg');
     game.load.image('ground', 'assets/ground.png');
+    game.load.image('grid', 'assets/grid.png');
 
     // sprite atlas
     game.load.atlasJSONArray('threematch', 'assets/threematch.png', 'assets/threematch.json');
@@ -18,6 +19,12 @@ function preload() {
 
 
 function create() {
+    gameID = (new Date()).getTime() + '-' + Math.floor(Math.random() * 1E16);
+    TERMINATED = false;
+    MOVES_LEFT = TOTAL_MOVES;
+    medalLeft = LEVEL_1_TOTAL_MEDALS;
+    SCORE = 0;
+
     // physics engine
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -29,6 +36,9 @@ function create() {
     var ground = game.add.sprite(0, HEIGHT / 30, 'ground');
     ground.height = HEIGHT;
     ground.width = WIDTH;
+
+    var grid = game.add.sprite(MARGIN_H, MARGIN_V, 'grid');
+    grid.height = grid.width = ROWS * CELL;
 
     // gemGroup group
     medalGroup = game.add.group();

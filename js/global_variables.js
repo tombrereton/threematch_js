@@ -3,16 +3,16 @@ var ROWS = 9;
 var COLS = 9;
 
 // Game variables
-var LEVEL_1_TOTAL_MEDALS = 3
-var LEVEL_2_TOTAL_MEDALS = 4
-var LEVEL_3_TOTAL_MEDALS = 5
+var LEVEL_1_TOTAL_MEDALS = 3;
+var LEVEL_2_TOTAL_MEDALS = 4;
+var LEVEL_3_TOTAL_MEDALS = 5;
 var TOTAL_MOVES = 20;
 var MOVES_LEFT = 20;
-var GEM_TYPES = 6
-var BONUS_TYPES = 3
-var ICE_ROWS = 5
-var ICE_LAYERS = 1
-var RANDOM_SEED = undefined  // Set to NONE to use current system time
+var GEM_TYPES = 6;
+var BONUS_TYPES = 3;
+var ICE_ROWS = 5;
+var ICE_LAYERS = 1;
+var RANDOM_SEED = undefined; // Set to NONE to use current system time
 var TERMINATED = false;
 
 // GUI variables
@@ -29,11 +29,11 @@ var HEIGHT;
 var maxHeight = 600;
 
 if ((windowWidth - 20) * 4 / 3 < 0.8 * windowHeight) {
-    // Phone/portrait
+    // Phone / portrait
     WIDTH = windowWidth - 20;
     HEIGHT = WIDTH * 4 / 3;
 } else {
-    // Desktop/landscape
+    // Desktop / landscape
     HEIGHT = Math.min(0.8 * windowHeight, maxHeight);
     WIDTH = HEIGHT * 3 / 4;
 }
@@ -86,4 +86,4 @@ var medalLeft = LEVEL_1_TOTAL_MEDALS;
 var tempMedalFreed = 0;
 
 
-var gameID = (new Date()).getTime() + '-' + Math.floor(Math.random() * 1E16);
+var gameID;
