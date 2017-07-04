@@ -1,10 +1,5 @@
-var player;
-var platforms;
-var cursors;
-
-var stars;
-var score = 0;
-var scoreText;
+// var score = 0;
+// var scoreText;
 
 
 // the game
@@ -53,7 +48,6 @@ function create() {
     // add functions for clicking on gems
     game.input.onDown.add(gemSelect);
     game.input.onUp.add(gemDeselect);
-    game.input.onTap.add(gemSelect);
 
     // setup up SCORE text
     var scroreT = ("        " + 0).slice(-8);
@@ -62,15 +56,6 @@ function create() {
     scoreText = game.add.text(16, HEIGHT - 3 * TEXT_HEIGHT, 'Score: ' + scroreT, {fontSize: '28px', fill: '#000'});
     movesText = game.add.text(16, HEIGHT - 2 * TEXT_HEIGHT, 'Moves: ' + movesT, {fontSize: '28px', fill: '#000'});
     medalsText = game.add.text(16, HEIGHT - 1 * TEXT_HEIGHT, 'Medals: ' + medalsT, {fontSize: '28px', fill: '#000'});
-    // highScoreText = game.add.text(WIDTH - WIDTH * 0.38, HEIGHT - 2 * TEXT_HEIGHT, 'High Score: ', {
-    //     fontSize: '28px',
-    //     fill: '#000'
-    // });
-    // highScoreText = game.add.text(WIDTH - WIDTH * 0.33, HEIGHT - 1 * TEXT_HEIGHT, '000,000', {
-    //     fontSize: '28px',
-    //     fill: '#000'
-    // });
-
 }
 
 function update() {
