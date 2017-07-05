@@ -21,8 +21,8 @@ function sendScore(nickname, gameID, score, level) {
     });
 }
 
-function updateHighScores() {
-    $.post('php/scores_db.php', {operationType: 'getHighScores'}, function (data, state) {
+function updateHighScores(level) {
+    $.post('php/scores_db.php', {operationType: 'getHighScores', level: level}, function (data, state) {
         document.getElementById('highscores').innerHTML = data;
     });
 }
