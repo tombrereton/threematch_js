@@ -377,7 +377,7 @@ function checkWin() {
             fill: '#000'
         });
         winText.anchor.setTo(0.5, 0.5);
-        sendScore(nickName, gameID, SCORE);
+        sendScore(nickName, gameID, SCORE, level);
         document.getElementById('restart').style.visibility = 'visible';
         document.getElementById('restart').onclick = restart;
     } else if (MOVES_LEFT === 0) {
@@ -387,7 +387,7 @@ function checkWin() {
             fill: '#000'
         });
         winText.anchor.setTo(0.5, 0.5);
-        sendScore(nickName, gameID, SCORE);
+        sendScore(nickName, gameID, SCORE, level);
         document.getElementById('restart').style.visibility = 'visible';
         document.getElementById('restart').onclick = restart;
     }
