@@ -7,11 +7,11 @@ $dbname = 'tom';
 $user = 'tom';
 $db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=Fanta");
 
-function insertScore($nickname, $score, $gameID)
+function insertScore($nickname, $score, $gameID, $level)
 {
     global $db;
-    $result = pg_prepare($db, 'insertScore', "INSERT INTO scores (nickname, score, game_id) VALUES ($1,$2,$3)");
-    $result = pg_execute($db, 'insertScore', array($nickname, $score, $gameID));
+    $result = pg_prepare($db, 'insertScore', "INSERT INTO scores (nickname, score, game_id, level) VALUES ($1,$2,$3,$4)");
+    $result = pg_execute($db, 'insertScore', array($nickname, $score, $gameID, $level));
 }
 
 function getHighScores()
@@ -74,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nickname = $_POST['nickname'];
         $score = $_POST['score'];
         $gameID = $_POST['gameID'];
-        insertScore($nickname, $score, $gameID);
+        $level = $_POST['level'];
+        insertScore($nickname, $score, $gameID, $level);
     }
 }
 

@@ -1,16 +1,13 @@
 function updateProgressBar() {
     var percentage = 100 / TOTAL_MOVES * (TOTAL_MOVES - MOVES_LEFT);
-    console.log(percentage);
 
     if (percentage <= 50) {
         document.getElementById('prog-success').style.width = percentage + '%';
     } else if (percentage <= 75) {
         percentage -= 50;
-        console.log(percentage);
         document.getElementById('prog-warning').style.width = percentage + '%';
     } else {
         percentage -= 75;
-        console.log(percentage);
         document.getElementById('prog-danger').style.width = percentage + '%';
     }
 }
