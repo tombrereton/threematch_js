@@ -5,7 +5,7 @@ $tableString .= <<<'NTAG'
                         <tr>
                             <th class="text-center">Rank</th>
                             <th class="text-center">Nickname</th>
-                            <th class="text-center">Score</th>
+                            <th class="text-right">Score</th>
                         </tr>
                         </thead>
 

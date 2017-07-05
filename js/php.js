@@ -17,25 +17,28 @@ function sendScore(nickname, gameID, score, level) {
         level: level
     }, function (data, state) {
         updateUserScore(nickname);
-        updateHighScores(0)
+        updateHighScores(0);
+        updateHighScores(1);
+        updateHighScores(2);
     });
 }
 
-function updateHighScores(level = 0) {
+function updateHighScores(level) {
     $.post('php/scores_db.php', {operationType: 'getHighScores', level: level}, function (data, state) {
 
         if (level === 0) {
-            document.getElementById('Level1').innerHTML = data;
+            document.getElementById('Level0').innerHTML = data;
         } else if (level === 1) {
-            document.getElementById('Level2').innerHTML = data;
+            document.getElementById('Level1').innerHTML = data;
         } else if (level === 2) {
-            document.getElementById('Level3').innerHTML = data;
+            document.getElementById('Level2').innerHTML = data;
         }
     });
 }
 
 function updateUserScore(nickname) {
     $.post('php/scores_db.php', {operationType: 'getUserScore', nickname: nickname}, function (data, state) {
+        document.getElementById('userScoreTitle').innerHTML = "High Score: " + nickname;
         document.getElementById('userHighScore').innerHTML = data;
     });
 }

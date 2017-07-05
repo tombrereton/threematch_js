@@ -28,3 +28,16 @@ function changeName() {
     }
     updateUserScore(nickName);
 }
+
+function changeTab(level) {
+    var oldLevel = (level + 2) % 3;
+    var newLevel = level % 3;
+    var oldTabHeader = "tabLevel" + (oldLevel);
+    var oldTabPane = "Level" + (oldLevel);
+    var tabHeader = "tabLevel" + (newLevel);
+    var tabPane = "Level" + (newLevel);
+    document.getElementById(oldTabHeader).classList.remove('active');
+    document.getElementById(oldTabPane).classList.remove('active');
+    document.getElementById(tabHeader).classList.add('active');
+    document.getElementById(tabPane).classList.add('active');
+}

@@ -81,8 +81,8 @@ function getUserHighscore($nickname)
             $tableString .= "\t<tr>\n";
             $tableString .=
                 "\t\t<td>" . $row['rank'] . "</td>\n"
-                . "\t\t<td align='right'>" . $row['max'] . "</td>\n"
-                . "\t\t<td align='right'>" . ($row['level'] + 1) . "</td>\n";
+                . "\t\t<td align='right'>" . ($row['level'] + 1) . "</td>\n"
+                . "\t\t<td align='right'>" . $row['max'] . "</td>\n";
             $tableString .= "\t</tr>\n";
         }
     } else {
