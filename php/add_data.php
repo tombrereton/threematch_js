@@ -6,7 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valid_string = preg_match('/^((0\tstart)|([-\d\t]{1,813}))$/', $data_string);
     if ($valid_id && $valid_string) {
         $file = fopen($_SERVER['DOCUMENT_ROOT'] . '/data/' . $game_id . '.txt', 'a');
-        fwrite($file, $data_string . PHP_EOL);
+        $block = 1;
+        if (flock($file, LOCK_EX, $block)) {
+            {
+                fwrite($file, $data_string . PHP_EOL);
+                flock($file, LOCK_EX, $block);
+            }
+        }
         fclose($file);
     }
 }

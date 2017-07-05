@@ -362,10 +362,12 @@ function cascadeLoop() {
 
 function nextLevel() {
     level = (level + 1) % 3;
+    changeTab(level);
     resetProgressBar();
     create();
     document.getElementById('nextLevel').style.visibility = 'hidden';
-    document.getElementById('nextLevel').onclick = function() {};
+    document.getElementById('nextLevel').onclick = function () {
+    };
 }
 
 function checkWin() {

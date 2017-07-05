@@ -29,10 +29,12 @@ function insertScore($nickname, $score, $gameID, $level)
     $result = pg_execute($db, 'insertScore', array($nickname, $score, $gameID, $level));
 }
 
-function getHighScores()
+function getHighScores($level)
 {
-    $query = "SELECT nickname, MAX(score) as score FROM scores GROUP BY nickname ORDER BY score DESC LIMIT 10";
-    $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+    global $db;
+    $query_string = "SELECT nickname, MAX(score) as score FROM scores WHERE level = $1 GROUP BY nickname ORDER BY score DESC LIMIT 10";
+    $result = pg_prepare($db, 'getHighScores', $query_string);
+    $result = pg_execute($db, 'getHighScores', array($level));
     $arr = pg_fetch_all($result);
 
     $tableString = '';
@@ -40,6 +42,8 @@ function getHighScores()
     $rank = 1;
 
     if ($arr) {
+        include('table_header.php');
+
         foreach ($arr as $row) {
             $tableString .= "\t<tr>\n";
             $tableString .=
@@ -49,6 +53,9 @@ function getHighScores()
             $tableString .= "\t</tr>\n";
             $rank++;
         }
+
+
+        $tableString .= "</tbody>\n</table>";
     } else {
         $tableString = "<tr><td></td><td>None</td><td></td></tr>";
     }
@@ -59,20 +66,25 @@ function getHighScores()
 function getUserHighscore($nickname)
 {
     global $db;
-    $result = pg_prepare($db, 'userHighScore', "SELECT rank, nickname, max FROM (SELECT ROW_NUMBER() OVER(ORDER BY max DESC) AS rank, nickname, max FROM"
-        . "(SELECT nickname, MAX(score) FROM scores GROUP BY nickname) AS max_scores) AS ranked_max_score WHERE nickname=$1");
+    $query_string = "SELECT rank, nickname, max, level FROM (SELECT " .
+        "ROW_NUMBER() OVER(PARTITION BY level ORDER BY max DESC) AS rank, nickname, max, level FROM (SELECT " .
+        "nickname, MAX(score), level FROM scores GROUP BY nickname, level) AS max_level) AS ranked_max_level " .
+        "WHERE nickname = $1";
+    $result = pg_prepare($db, 'userHighScore', $query_string);
     $result = pg_execute($db, 'userHighScore', array($nickname));
 
     $arr = pg_fetch_all($result);
 
     $tableString = '';
     if ($arr) {
-        $tableString .= "\t<tr>\n";
-        $tableString .=
-            "\t\t<td>" . $arr[0]['rank'] . "</td>\n"
-            . "\t\t<td>" . $arr[0]['nickname'] . "</td>\n"
-            . "\t\t<td align='right'>" . $arr[0]['max'] . "</td>\n";
-        $tableString .= "\t</tr>\n";
+        foreach ($arr as $row) {
+            $tableString .= "\t<tr>\n";
+            $tableString .=
+                "\t\t<td>" . $row['rank'] . "</td>\n"
+                . "\t\t<td align='right'>" . ($row['level'] + 1) . "</td>\n"
+                . "\t\t<td align='right'>" . $row['max'] . "</td>\n";
+            $tableString .= "\t</tr>\n";
+        }
     } else {
         $tableString = "<tr><td></td><td>New user!</td><td></td></tr>";
     }
@@ -82,7 +94,7 @@ function getUserHighscore($nickname)
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['operationType'] == 'getHighScores') {
-        echo getHighScores();
+        echo getHighScores($_POST['level']);
     } elseif ($_POST['operationType'] == 'getUserScore') {
         echo getUserHighscore($_POST['nickname']);
     } elseif ($_POST['operationType'] == 'sendScore') {
