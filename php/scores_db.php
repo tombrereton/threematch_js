@@ -39,7 +39,6 @@ function getHighScores($level)
 
     $tableString = '';
 
-
     $rank = 1;
 
     if ($arr) {
@@ -78,25 +77,14 @@ function getUserHighscore($nickname)
 
     $tableString = '';
     if ($arr) {
-        $tableString .= "\t<tr>\n";
-        $tableString .=
-            "\t\t<td>" . $arr[0]['rank'] . "</td>\n"
-            . "\t\t<td>" . $arr[0]['nickname'] . "</td>\n"
-            . "\t\t<td align='right'>" . $arr[0]['max'] . "</td>\n"
-            . "\t\t<td>" . $arr[0]['level'] . "</td>\n";
-        $tableString .= "\t</tr>\n";
-        $tableString .=
-            "\t\t<td>" . $arr[1]['rank'] . "</td>\n"
-            . "\t\t<td>" . $arr[1]['nickname'] . "</td>\n"
-            . "\t\t<td align='right'>" . $arr[1]['max'] . "</td>\n"
-            . "\t\t<td>" . $arr[1]['level'] . "</td>\n";
-        $tableString .= "\t</tr>\n";
-        $tableString .=
-            "\t\t<td>" . $arr[2]['rank'] . "</td>\n"
-            . "\t\t<td>" . $arr[2]['nickname'] . "</td>\n"
-            . "\t\t<td align='right'>" . $arr[2]['max'] . "</td>\n"
-            . "\t\t<td>" . $arr[2]['level'] . "</td>\n";
-        $tableString .= "\t</tr>\n";
+        foreach ($arr as $row) {
+            $tableString .= "\t<tr>\n";
+            $tableString .=
+                "\t\t<td>" . $row['rank'] . "</td>\n"
+                . "\t\t<td align='right'>" . $row['max'] . "</td>\n"
+                . "\t\t<td align='right'>" . ($row['level'] + 1) . "</td>\n";
+            $tableString .= "\t</tr>\n";
+        }
     } else {
         $tableString = "<tr><td></td><td>New user!</td><td></td></tr>";
     }
