@@ -66,9 +66,10 @@ function create() {
     var scroreT = ("        " + 0).slice(-8);
     var movesT = ("      " + MOVES_LEFT).slice(-6);
     var medalsT = ("      " + medalsLeft).slice(-6);
-    scoreText = game.add.text(16, HEIGHT - 3 * TEXT_HEIGHT, 'Score: ' + scroreT, fontSizeColour);
-    movesText = game.add.text(16, HEIGHT - 2 * TEXT_HEIGHT, 'Moves: ' + movesT, fontSizeColour);
-    medalsText = game.add.text(16, HEIGHT - 1 * TEXT_HEIGHT, 'Medals: ' + medalsT, fontSizeColour);
+    var inset = 16 * WIDTH / 450;
+    scoreText = game.add.text(inset, HEIGHT - 3 * TEXT_HEIGHT, 'Score: ' + scroreT, fontSizeColour);
+    movesText = game.add.text(inset, HEIGHT - 2 * TEXT_HEIGHT, 'Moves: ' + movesT, fontSizeColour);
+    medalsText = game.add.text(inset, HEIGHT - 1 * TEXT_HEIGHT, 'Medals: ' + medalsT, fontSizeColour);
     levelText = game.add.text(WIDTH - WIDTH / 4, HEIGHT - 1 * TEXT_HEIGHT, 'Level: ' + (level + 1), fontSizeColour);
 }
 
