@@ -20,7 +20,7 @@ $dbname = $db_config['dbname'];
 $user = $db_config['user'];
 $passwd = $db_config['passwd'];
 
-$db = pg_connect("host=$host port=$port dbname=$dbname user=$user");
+$db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$passwd");
 
 function insertScore($nickname, $score, $gameID, $level)
 {

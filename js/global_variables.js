@@ -20,6 +20,7 @@ var medalsPerLevel = [3, 4, 5];
 var iceRowsPerLevel = [5, 7, 9];
 var movesPerLevel = [20, 25, 30];
 var totalMedals;
+var lineNumber;
 
 // GUI variables
 var w = window,

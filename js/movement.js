@@ -330,8 +330,8 @@ function initialHandling() {
         canPick = true;
         selectedOrb = null;
         checkWin();
-        sendData(gameID, getProgressState());
-        sendData(gameID, getGameState());
+        sendData(gameID, lineNumber++, getProgressState());
+        sendData(gameID, lineNumber++, getGameState());
     }
 }
 
@@ -365,7 +365,7 @@ function nextLevel() {
     resetProgressBar();
     create();
     document.getElementById('nextLevel').style.visibility = 'hidden';
-    document.getElementById('nextLevel').onclick = "";
+    document.getElementById('nextLevel').onclick = function() {};
 }
 
 function checkWin() {
