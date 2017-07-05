@@ -3,6 +3,16 @@
 // uncomment line in php.ini where it has php-pgsql
 
 require 'db_config.php';
+// make a db_config file and put this inside:
+
+//<?php
+//$db_config = array(
+//    'host' => 'host',
+//    'port' => 'port',
+//    'dbname' => 'dbname',
+//    'user' => 'user',
+//    'passwd' => 'passwd'
+//);
 
 $host = $db_config['host'];
 $port = $db_config['port'];
