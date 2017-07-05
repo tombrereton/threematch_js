@@ -6,14 +6,20 @@ var COLS = 9;
 var LEVEL_1_TOTAL_MEDALS = 3;
 var LEVEL_2_TOTAL_MEDALS = 4;
 var LEVEL_3_TOTAL_MEDALS = 5;
-var TOTAL_MOVES = 20;
-var MOVES_LEFT = 20;
+var TOTAL_MOVES; // = 20;
+var MOVES_LEFT; //  = 20;
 var GEM_TYPES = 6;
 var BONUS_TYPES = 3;
 var ICE_ROWS = 5;
 var ICE_LAYERS = 1;
 var RANDOM_SEED = undefined; // Set to NONE to use current system time
 var TERMINATED = false;
+
+var level = 0;
+var medalsPerLevel = [3, 4, 5];
+var iceRowsPerLevel = [5, 7, 9];
+var movesPerLevel = [20, 25, 30];
+var totalMedals;
 
 // GUI variables
 var w = window,
@@ -76,7 +82,7 @@ var medalState = [];
 
 // on screen text variables
 var SCORE = 0;
-var medalLeft = LEVEL_1_TOTAL_MEDALS;
+var medalsLeft; // = LEVEL_1_TOTAL_MEDALS;
 var tempMedalFreed = 0;
 
 // id variables

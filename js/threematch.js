@@ -21,9 +21,11 @@ function preload() {
 function create() {
     gameID = (new Date()).getTime() + '-' + Math.floor(Math.random() * 1E16);
     TERMINATED = false;
-    MOVES_LEFT = TOTAL_MOVES;
-    medalLeft = LEVEL_1_TOTAL_MEDALS;
     SCORE = 0;
+
+    TOTAL_MOVES = MOVES_LEFT = movesPerLevel[level];
+    totalMedals = medalsLeft = medalsPerLevel[level];
+    ICE_ROWS =  iceRowsPerLevel[level];
 
     // physics engine
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -47,7 +49,7 @@ function create() {
     removedMedalGroup = game.add.group();
 
     // initialise grids and sprites
-    initMedalGrid(LEVEL_1_TOTAL_MEDALS, medalGroup);
+    initMedalGrid(medalsLeft, medalGroup);
     initIceGrid(iceGroup);
     initGemGrid(gemGroup);
 
@@ -61,8 +63,8 @@ function create() {
 
     // setup up SCORE text
     var scroreT = ("        " + 0).slice(-8);
-    var movesT = ("      " + 20).slice(-6);
-    var medalsT = ("      " + 3).slice(-6);
+    var movesT = ("      " + MOVES_LEFT).slice(-6);
+    var medalsT = ("      " + medalsLeft).slice(-6);
     scoreText = game.add.text(16, HEIGHT - 3 * TEXT_HEIGHT, 'Score: ' + scroreT, {fontSize: '28px', fill: '#000'});
     movesText = game.add.text(16, HEIGHT - 2 * TEXT_HEIGHT, 'Moves: ' + movesT, {fontSize: '28px', fill: '#000'});
     medalsText = game.add.text(16, HEIGHT - 1 * TEXT_HEIGHT, 'Medals: ' + medalsT, {fontSize: '28px', fill: '#000'});

@@ -151,8 +151,8 @@ function moveMade() {
 }
 
 function decrementMedalCount() {
-    medalLeft--;
-    var medalsT = ("      " + medalLeft).slice(-6);
+    medalsLeft--;
+    var medalsT = ("      " + medalsLeft).slice(-6);
     medalsT = 'Medals: ' + medalsT;
     medalsText.setText(medalsT);
 }
@@ -361,6 +361,7 @@ function cascadeLoop() {
 }
 
 function restart() {
+    level = (level + 1) % 3;
     resetProgressBar();
     create();
     document.getElementById('restart').style.visibility = 'hidden';
@@ -368,7 +369,7 @@ function restart() {
 }
 
 function checkWin() {
-    if (medalLeft === 0) {
+    if (medalsLeft === 0) {
         TERMINATED = true;
         extrapolateScore();
         var winText = game.add.text(game.world.centerX, game.world.centerY, 'You Won!', {

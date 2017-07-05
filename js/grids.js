@@ -296,7 +296,7 @@ function addGem(row, col, gemType, bonusType) {
 }
 
 function getProgressState() {
-    var medalsUncovered = LEVEL_1_TOTAL_MEDALS - medalLeft;
+    var medalsUncovered = totalMedals - medalsLeft;
     var score = SCORE;
     var action = swapLocations;
 
