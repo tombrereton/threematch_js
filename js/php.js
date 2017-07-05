@@ -23,7 +23,7 @@ function sendScore(nickname, gameID, score, level) {
 
 function updateHighScores() {
     $.post('php/scores_db.php', {operationType: 'getHighScores'}, function (data, state) {
-        document.getElementById('highscores').innerHTML = data;
+        document.getElementById('Level1').innerHTML = data;
     });
 }
 

@@ -4,7 +4,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valid_id = preg_match('/^\d*-\d*$/', $game_id);
     if ($valid_id) {
         $data_file = fopen($_SERVER['DOCUMENT_ROOT'] . '/data/' . $game_id . '.txt', 'a');
-        include('header.php');
+
+        $block = 1;
+        if (flock($data_file, LOCK_EX, $block)) {
+            {
+                include('header.php');
+                flock($data_file, LOCK_EX, $block);
+            }
+        }
+
         fclose($data_file);
     }
 }
