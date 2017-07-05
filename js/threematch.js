@@ -1,6 +1,7 @@
 // var score = 0;
 // var scoreText;
 
+document.getElementById('progress').style.width = WIDTH + 'px';
 
 // the game
 var game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, 'game',
@@ -15,7 +16,6 @@ function preload() {
     // sprite atlas
     game.load.atlasJSONArray('threematch', 'assets/threematch.png', 'assets/threematch.json');
 }
-
 
 
 function create() {

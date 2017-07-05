@@ -18,12 +18,21 @@
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
     <script src="js/php.js"></script>
+    <script src="js/index_functions.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
+<script>
+    var nickName = localStorage['nickName'] || null;
+    while (nickName === null || nickName === '') {
+        nickName = prompt('please enter your nickname for scoring:')
+        localStorage['nickName'] = nickName;
+    }
+    updateUserScore(nickName);
+
+</script>
+
 <body>
-
-
 <div class="container-fluid text-center">
 
     <div class="row" style="padding:20px;">
@@ -81,10 +90,44 @@
                 <tbody id="userHighScore">
                 </tbody>
             </table>
-            <button id="restart" type="button" style="visibility: hidden;" onclick="">Restart game</button>
+
+            <div class="row">
+                <button id="changeName" type="button" class="btn btn-default" style="margin-bottom: 10px"
+                        onclick="changeName()">Change Name
+                </button>
+
+            </div>
+            <div class="row">
+                <button id="restart" type="button" class="btn btn-default" style="visibility: hidden;" onclick="">
+                    Restart
+                    game
+                </button>
+            </div>
+
+
+            <!--<button type="button" class="btn btn-default">Middle</button>-->
+            <!--<button type="button" class="btn btn-default">Right</button>-->
+
         </div>
     </div>
 
+    <div class="row" style="margin-top: 10px">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+            <div id="progress" class="progress center-block" style="width: 0px">
+                <div id="prog-success" class="progress-bar progress-bar-success" style="width: 0%">
+                </div>
+                <div id="prog-warning" class="progress-bar progress-bar-warning progress-bar-striped"
+                     style="width: 0%">
+                </div>
+                <div id="prog-danger" class="progress-bar progress-bar-danger" style="width: 0%">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+        </div>
+    </div>
 
     <footer class="container-fluid text-center">
         <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a
@@ -92,14 +135,6 @@
     </footer>
 </div>
 
-<script>
-    var nickName = localStorage['nickName'] || null;
-    while (nickName === null || nickName === '') {
-        nickName = prompt('Please enter your nickname for scoring:')
-        localStorage['nickName'] = nickName;
-    }
-    updateUserScore(nickName);
-</script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

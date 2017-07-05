@@ -59,7 +59,7 @@ function getUserHighscore($nickname)
             . "\t\t<td align='right'>" . $arr[0]['max'] . "</td>\n";
         $tableString .= "\t</tr>\n";
     } else {
-        $tableString = "<tr><td></td><td>None</td><td></td></tr>";
+        $tableString = "<tr><td></td><td>New user!</td><td></td></tr>";
     }
 
     return $tableString;

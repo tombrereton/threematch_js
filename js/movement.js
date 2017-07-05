@@ -61,13 +61,8 @@ function gemSelect(e) {
 function swapGems(gem1, gem2, swapBack) {
     canPick = false;
 
-
-    // get gem details
-    // var gem1Sprite = gem1.gemSprite;
-    // var gem2Sprite = gem2.gemSprite;
     var gem1Sprite = gemArray[getGemRow(gem1)][getGemCol(gem1)].gemSprite;
     var gem2Sprite = gemArray[getGemRow(gem2)][getGemCol(gem2)].gemSprite;
-
 
     // animations
     var toGem1Y = MARGIN_V + CELL / 2 + getGemRow(gem2) * CELL;
@@ -152,11 +147,11 @@ function moveMade() {
     var movesT = ("      " + MOVES_LEFT).slice(-6);
     movesT = 'Moves: ' + movesT;
     movesText.setText(movesT);
+    updateProgressBar();
 }
 
 function decrementMedalCount() {
     medalLeft--;
-    // checkWin();
     var medalsT = ("      " + medalLeft).slice(-6);
     medalsT = 'Medals: ' + medalsT;
     medalsText.setText(medalsT);
@@ -190,7 +185,6 @@ function gemDeselect(e) {
 }
 
 function removeGems() {
-    // removalsBonusesCount = removals.length + bonuses.length - 2;
     removing = removals.length + bonuses.length;
 
     for (var i in removals) {
@@ -242,18 +236,13 @@ function addBonuses() {
         bonusTween2.chain(bonusTween3);
         bonusTween3.chain(bonusTween4);
         bonusTween.start();
-        // var bonusTween = game.add.tween(bonusSprite).to({x: bonusSprite.position.x + SHAKE_RADIUS}, SHAKE_SPEED, function (k) {
-        //     return wiggle(k, SHAKE_PERIOD1, SHAKE_PERIOD2);
-        // }, true);
 
         bonusTween4.onComplete.add(function () {
             removing--;
-            // freeMedals();
             cascadeLoop();
         })
     }
     updateScore();
-    // checkWin();
     bonuses = []
 }
 
@@ -372,6 +361,7 @@ function cascadeLoop() {
 }
 
 function restart() {
+    resetProgressBar();
     create();
     document.getElementById('restart').style.visibility = 'hidden';
     document.getElementById('restart').onclick = "";

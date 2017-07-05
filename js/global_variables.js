@@ -22,12 +22,9 @@ var w = window,
     g = d.getElementsByTagName('body')[0],
     windowWidth = w.innerWidth || e.clientWidth || g.clientWidth,
     windowHeight = w.innerHeight || e.clientHeight || g.clientHeight;
-
-// WIDTH
 var WIDTH;
 var HEIGHT;
 var maxHeight = 600;
-
 if ((windowWidth - 20) * 4 / 3 < 0.8 * windowHeight) {
     // Phone / portrait
     WIDTH = windowWidth - 20;
@@ -37,8 +34,6 @@ if ((windowWidth - 20) * 4 / 3 < 0.8 * windowHeight) {
     HEIGHT = Math.min(0.8 * windowHeight, maxHeight);
     WIDTH = HEIGHT * 3 / 4;
 }
-
-/* * w.devicePixelRatio;*/
 var CELL = (WIDTH - WIDTH / 50) / COLS;
 var MARGIN_H = (WIDTH - (COLS * CELL)) / 2;
 var MARGIN_V = HEIGHT / 64;
@@ -80,10 +75,9 @@ var medalArray = [];
 var medalState = [];
 
 // on screen text variables
-// var score = 0;
 var SCORE = 0;
 var medalLeft = LEVEL_1_TOTAL_MEDALS;
 var tempMedalFreed = 0;
 
-
+// id variables
 var gameID;
