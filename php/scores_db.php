@@ -1,11 +1,26 @@
 <?php
 // requires php-pgsql
 // uncomment line in php.ini where it has php-pgsql
-$host = 'localhost';
-$port = '5432';
-$dbname = 'postgres';
-$user = 'postgres';
-$db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=Fanta");
+
+require 'db_config.php';
+// make a db_config file and put this inside:
+
+//<?php
+//$db_config = array(
+//    'host' => 'host',
+//    'port' => 'port',
+//    'dbname' => 'dbname',
+//    'user' => 'user',
+//    'passwd' => 'passwd'
+//);
+
+$host = $db_config['host'];
+$port = $db_config['port'];
+$dbname = $db_config['dbname'];
+$user = $db_config['user'];
+$passwd = $db_config['passwd'];
+
+$db = pg_connect("host=$host port=$port dbname=$dbname user=$user");
 
 function insertScore($nickname, $score, $gameID, $level)
 {
