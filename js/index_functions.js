@@ -5,9 +5,11 @@ function updateProgressBar() {
         document.getElementById('prog-success').style.width = percentage + '%';
     } else if (percentage <= 75) {
         percentage -= 50;
+        document.getElementById('prog-success').style.width = '50%';
         document.getElementById('prog-warning').style.width = percentage + '%';
     } else {
         percentage -= 75;
+        document.getElementById('prog-warning').style.width = '25%';
         document.getElementById('prog-danger').style.width = percentage + '%';
     }
 }
