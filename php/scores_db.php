@@ -72,13 +72,14 @@ function getUserHighscore($nickname)
 
     $tableString = '';
     if ($arr) {
-        $tableString .= "\t<tr>\n";
-        $tableString .=
-            "\t\t<td>" . $arr[0]['rank'] . "</td>\n"
-            . "\t\t<td>" . $arr[0]['nickname'] . "</td>\n"
-            . "\t\t<td align='right'>" . $arr[0]['max'] . "</td>\n"
-            . "\t\t<td>" . $arr[0]['level'] . "</td>\n";
-        $tableString .= "\t</tr>\n";
+        foreach ($arr as $row) {
+            $tableString .= "\t<tr>\n";
+            $tableString .=
+                "\t\t<td>" . $row['rank'] . "</td>\n"
+                . "\t\t<td align='right'>" . $row['max'] . "</td>\n"
+                . "\t\t<td align='right'>" . ($row['level'] + 1) . "</td>\n";
+            $tableString .= "\t</tr>\n";
+        }
     } else {
         $tableString = "<tr><td></td><td>New user!</td><td></td></tr>";
     }
@@ -88,7 +89,7 @@ function getUserHighscore($nickname)
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['operationType'] == 'getHighScores') {
-        echo getHighScores();
+        echo getHighScores($_POST['level']);
     } elseif ($_POST['operationType'] == 'getUserScore') {
         echo getUserHighscore($_POST['nickname']);
     } elseif ($_POST['operationType'] == 'sendScore') {
