@@ -17,13 +17,20 @@ function sendScore(nickname, gameID, score, level) {
         level: level
     }, function (data, state) {
         updateUserScore(nickname);
-        updateHighScores()
+        updateHighScores(0)
     });
 }
 
 function updateHighScores(level) {
     $.post('php/scores_db.php', {operationType: 'getHighScores', level: level}, function (data, state) {
-        document.getElementById('Level1').innerHTML = data;
+
+        if (level === 0) {
+            document.getElementById('Level1').innerHTML = data;
+        } else if (level === 1) {
+            document.getElementById('Level2').innerHTML = data;
+        } else if (level === 2) {
+            document.getElementById('Level3').innerHTML = data;
+        }
     });
 }
 
