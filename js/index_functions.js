@@ -1,6 +1,5 @@
 function updateProgressBar() {
     var percentage = 100 / TOTAL_MOVES * (TOTAL_MOVES - MOVES_LEFT);
-    console.log(percentage);
 
     if (percentage <= 50) {
         document.getElementById('prog-success').style.width = percentage + '%';
