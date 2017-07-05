@@ -1,5 +1,5 @@
-function startFile(gameID) {
-    $.post('php/start_file.php', {gameID: gameID}, function (data, state) {
+function startFile(gameID, moves, medals) {
+    $.post('php/start_file.php', {gameID: gameID, moves: moves, medals: medals}, function (data, state) {
         console.log(data);
     });
 }

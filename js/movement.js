@@ -360,12 +360,12 @@ function cascadeLoop() {
     }
 }
 
-function restart() {
+function nextLevel() {
     level = (level + 1) % 3;
     resetProgressBar();
     create();
-    document.getElementById('restart').style.visibility = 'hidden';
-    document.getElementById('restart').onclick = "";
+    document.getElementById('nextLevel').style.visibility = 'hidden';
+    document.getElementById('nextLevel').onclick = "";
 }
 
 function checkWin() {
@@ -378,8 +378,8 @@ function checkWin() {
         });
         winText.anchor.setTo(0.5, 0.5);
         sendScore(nickName, gameID, SCORE, level);
-        document.getElementById('restart').style.visibility = 'visible';
-        document.getElementById('restart').onclick = restart;
+        document.getElementById('nextLevel').style.visibility = 'visible';
+        document.getElementById('nextLevel').onclick = nextLevel;
     } else if (MOVES_LEFT === 0) {
         TERMINATED = true;
         var winText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over', {
@@ -388,8 +388,8 @@ function checkWin() {
         });
         winText.anchor.setTo(0.5, 0.5);
         sendScore(nickName, gameID, SCORE, level);
-        document.getElementById('restart').style.visibility = 'visible';
-        document.getElementById('restart').onclick = restart;
+        document.getElementById('nextLevel').style.visibility = 'visible';
+        document.getElementById('nextLevel').onclick = nextLevel;
     }
 }
 

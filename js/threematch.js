@@ -53,7 +53,7 @@ function create() {
     initIceGrid(iceGroup);
     initGemGrid(gemGroup);
 
-    startFile(gameID);
+    startFile(gameID, MOVES_LEFT, medalsLeft);
     sendData(gameID, 'start');
     sendData(gameID, getGameState());
 
