@@ -22,6 +22,7 @@ function create() {
     gameID = (new Date()).getTime() + '-' + Math.floor(Math.random() * 1E16);
     TERMINATED = false;
     SCORE = 0;
+    lineNumber = 0;
 
     TOTAL_MOVES = MOVES_LEFT = movesPerLevel[level];
     totalMedals = medalsLeft = medalsPerLevel[level];
@@ -54,8 +55,8 @@ function create() {
     initGemGrid(gemGroup);
 
     startFile(gameID, MOVES_LEFT, medalsLeft);
-    sendData(gameID, 'start');
-    sendData(gameID, getGameState());
+    sendData(gameID, lineNumber++, 'start');
+    sendData(gameID, lineNumber++, getGameState());
 
     // add functions for clicking on gems
     game.input.onDown.add(gemSelect);
