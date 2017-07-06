@@ -6,7 +6,6 @@ var game = new Phaser.Game(WIDTH, HEIGHT, Phaser.AUTO, 'game');
 game.state.add('load', loadState);
 game.state.add('intro', introState);
 game.state.add('play', playState);
-// game.state.add('finishedLevel', finishedLevelState);
 
 game.state.start('load');
 

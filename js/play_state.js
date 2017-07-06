@@ -1,5 +1,7 @@
 var playState = {
     create: function () {
+        game.input.onDown.remove(playState.create);
+
         gameID = (new Date()).getTime() + '-' + Math.floor(Math.random() * 1E16);
         TERMINATED = false;
         SCORE = 0;

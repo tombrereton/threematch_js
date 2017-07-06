@@ -368,20 +368,21 @@ function cascadeLoop() {
 }
 
 function nextLevel() {
-    document.getElementById('nextLevel').style.visibility = 'visible';
-    document.getElementById('nextLevel').style.margin = '10px';
 
     var gameIDCopy = gameID;
-    return function () {
-        if (gameID === gameIDCopy) {
-            level = (level + 1) % 3;
-            changeTab(level);
-            resetProgressBar();
-            playState.create();
-            document.getElementById('nextLevel').style.visibility = 'hidden';
-            document.getElementById('nextLevel').style.margin = '0px';
-        }
-    };
+    if (gameID === gameIDCopy) {
+        level = (level + 1) % 3;
+        changeTab(level);
+        resetProgressBar();
+        game.input.onDown.add(playState.create);
+
+        var nextLevelText = game.add.text(game.world.centerX, game.world.centerY + HEIGHT / 4, 'Click for next level', {
+            font: 'bold 32pt Helvetica',
+            fill: '#000'
+        });
+        nextLevelText.anchor.setTo(0.5, 0.5);
+    }
+
 }
 
 function checkWin() {
@@ -394,7 +395,7 @@ function checkWin() {
         });
         winText.anchor.setTo(0.5, 0.5);
         sendScore(nickName, gameID, SCORE, level, true);
-        document.getElementById('nextLevel').onclick = nextLevel();
+        nextLevel();
     } else if (MOVES_LEFT === 0) {
         TERMINATED = true;
         var winText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over', {
@@ -403,7 +404,7 @@ function checkWin() {
         });
         winText.anchor.setTo(0.5, 0.5);
         sendScore(nickName, gameID, SCORE, level, false);
-        document.getElementById('nextLevel').onclick = nextLevel();
+        nextLevel();
     }
 }
 
