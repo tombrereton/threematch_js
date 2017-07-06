@@ -6,6 +6,7 @@ function startFile(gameID, moves, medals) {
 
 function sendData(gameID, lineNumber, dataString) {
     $.post('php/add_data.php', {gameID: gameID, dataString: lineNumber + '\t' + dataString}, function (data, state) {
+        console.log(data);
     });
 }
 

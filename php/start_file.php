@@ -1,4 +1,6 @@
 <?php
+require('create_data_dir.php');
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $game_id = $_POST['gameID'];
     $valid_id = preg_match('/^\d*-\d*$/', $game_id);
