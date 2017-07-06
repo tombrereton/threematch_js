@@ -29,13 +29,24 @@
 
         </div>
         <div class="col-md-4">
-            <h3 class="masthead-brand">Gem Island</h3>
-            <nav>
-                <ul class="nav masthead-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="/credits.html">Credits</a></li>
-                    <li><a href="https://github.com/tombrereton/threematch">Github</a></li>
-                </ul>
+            <nav class="">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    </button>
+                    <div id="leftNavbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-left masthead-nav">
+                            <li class="active"><a href="#">Gem Island</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right masthead-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="/credits.html">Credits</a></li>
+                        <li><a href="https://github.com/tombrereton/threematch">Github</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </nav>
         </div>
         <div class="col-md-4">
@@ -46,7 +57,26 @@
     <div class="row">
         <div class="col-lg-4">
         </div>
-        <div class="col-lg-4" align="center" id="game">
+        <div class="col-lg-4" align="center" id="">
+            <div id="game" class="row">
+            </div>
+            <div class="row">
+                <button id="nextLevel" type="button" class="btn btn-default" style="visibility: hidden;">
+                    Next Level
+                </button>
+                <!--<button id="nextLevel" type="button" class="btn btn-default" disabled>-->
+                <!--Next Level-->
+                <!--</button>-->
+                <div id="progress" class="progress center-block" style="width: 0px">
+                    <div id="prog-success" class="progress-bar progress-bar-success" style="width: 0%">
+                    </div>
+                    <div id="prog-warning" class="progress-bar progress-bar-warning progress-bar-striped"
+                         style="width: 0%">
+                    </div>
+                    <div id="prog-danger" class="progress-bar progress-bar-danger" style="width: 0%">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-lg-1">
         </div>
@@ -104,14 +134,11 @@
             </table>
 
             <div class="row">
-                <button id="changeName" type="button" class="btn btn-default" style="margin-bottom: 10px">Change Name
-                </button>
+                <!--<button id="changeName" type="button" class="btn btn-default" style="margin-bottom: 10px">Change Name-->
+                <!--</button>-->
 
             </div>
             <div class="row">
-                <button id="nextLevel" type="button" class="btn btn-default" disabled>
-                    Next Level
-                </button>
             </div>
 
 
@@ -125,15 +152,6 @@
         <div class="col-sm-4">
         </div>
         <div class="col-sm-4">
-            <div id="progress" class="progress center-block" style="width: 0px">
-                <div id="prog-success" class="progress-bar progress-bar-success" style="width: 0%">
-                </div>
-                <div id="prog-warning" class="progress-bar progress-bar-warning progress-bar-striped"
-                     style="width: 0%">
-                </div>
-                <div id="prog-danger" class="progress-bar progress-bar-danger" style="width: 0%">
-                </div>
-            </div>
         </div>
         <div class="col-sm-4">
         </div>

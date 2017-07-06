@@ -368,6 +368,9 @@ function cascadeLoop() {
 }
 
 function nextLevel() {
+    document.getElementById('nextLevel').style.visibility = 'visible';
+    document.getElementById('nextLevel').style.margin = '10px';
+
     var gameIDCopy = gameID;
     return function () {
         if (gameID === gameIDCopy) {
@@ -375,7 +378,8 @@ function nextLevel() {
             changeTab(level);
             resetProgressBar();
             create();
-            document.getElementById('nextLevel').disabled = true;
+            document.getElementById('nextLevel').style.visibility = 'hidden';
+            document.getElementById('nextLevel').style.margin = '0px';
         }
     };
 }
@@ -390,7 +394,6 @@ function checkWin() {
         });
         winText.anchor.setTo(0.5, 0.5);
         sendScore(nickName, gameID, SCORE, level, true);
-        document.getElementById('nextLevel').disabled = false;
         document.getElementById('nextLevel').onclick = nextLevel();
     } else if (MOVES_LEFT === 0) {
         TERMINATED = true;
@@ -400,7 +403,6 @@ function checkWin() {
         });
         winText.anchor.setTo(0.5, 0.5);
         sendScore(nickName, gameID, SCORE, level, false);
-        document.getElementById('nextLevel').disabled = false;
         document.getElementById('nextLevel').onclick = nextLevel();
     }
 }
