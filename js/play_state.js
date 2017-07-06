@@ -56,3 +56,4 @@ var playState = {
         levelText = game.add.text(WIDTH - WIDTH / 4, HEIGHT - 1 * TEXT_HEIGHT, 'Level: ' + (level + 1), fontSizeColour);
     }
 }
+
