@@ -379,7 +379,7 @@ function checkWin() {
             fill: '#000'
         });
         winText.anchor.setTo(0.5, 0.5);
-        sendScore(nickName, gameID, SCORE, level);
+        sendScore(nickName, gameID, SCORE, level, true);
         document.getElementById('nextLevel').style.visibility = 'visible';
         document.getElementById('nextLevel').onclick = nextLevel;
     } else if (MOVES_LEFT === 0) {
@@ -389,7 +389,7 @@ function checkWin() {
             fill: '#000'
         });
         winText.anchor.setTo(0.5, 0.5);
-        sendScore(nickName, gameID, SCORE, level);
+        sendScore(nickName, gameID, SCORE, level, false);
         document.getElementById('nextLevel').style.visibility = 'visible';
         document.getElementById('nextLevel').onclick = nextLevel;
     }

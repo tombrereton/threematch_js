@@ -8,13 +8,14 @@ function sendData(gameID, lineNumber, dataString) {
     });
 }
 
-function sendScore(nickname, gameID, score, level) {
+function sendScore(nickname, gameID, score, level, win) {
     $.post('php/scores_db.php', {
         operationType: 'sendScore',
         nickname: nickname,
         gameID: gameID,
         score: score,
-        level: level
+        level: level,
+        win: win
     }, function (data, state) {
         updateUserScore(nickname);
         updateHighScores(0);

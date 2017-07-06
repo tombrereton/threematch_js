@@ -22,11 +22,11 @@ $passwd = $db_config['passwd'];
 
 $db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$passwd");
 
-function insertScore($nickname, $score, $gameID, $level)
+function insertScore($nickname, $score, $gameID, $level, $win)
 {
     global $db;
-    $result = pg_prepare($db, 'insertScore', "INSERT INTO scores (nickname, score, game_id, level) VALUES ($1,$2,$3,$4)");
-    $result = pg_execute($db, 'insertScore', array($nickname, $score, $gameID, $level));
+    $result = pg_prepare($db, 'insertScore', "INSERT INTO scores (nickname, score, game_id, level, win) VALUES ($1,$2,$3,$4,$5)");
+    $result = pg_execute($db, 'insertScore', array($nickname, $score, $gameID, $level, $win));
 }
 
 function getHighScores($level)
@@ -102,7 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $score = $_POST['score'];
         $gameID = $_POST['gameID'];
         $level = $_POST['level'];
-        insertScore($nickname, $score, $gameID, $level);
+        $win = $_POST['win'];
+        insertScore($nickname, $score, $gameID, $level, $win);
     }
 }
 
