@@ -76,3 +76,17 @@ function create() {
 function update() {
 }
 
+document.getElementById('changeName').onclick = changeName;
+
+updateHighScores(0);
+updateHighScores(1);
+updateHighScores(2);
+
+var nickName = localStorage['nickName'] || null;
+
+if (nickName === null || nickName === '') {
+    changeName();
+} else {
+    updateUserScore(nickName);
+}
+

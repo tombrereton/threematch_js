@@ -21,10 +21,13 @@ function resetProgressBar() {
 }
 
 function changeName() {
-    nickName = 'default';
-    while (nickName === 'default' || nickName === '') {
-        nickName = prompt('please enter your nickname for scoring:')
-        localStorage['nickName'] = nickName;
+    nickName = prompt('please enter your nickname for scoring:');
+    if (!nickName) {
+        // User cancelled prompt or just pressed enter
+        nickName = 'default';
+        localStorage['nickname'] = undefined;
+    } else {
+        localStorage['nickname'] = nickName;
     }
     updateUserScore(nickName);
 }

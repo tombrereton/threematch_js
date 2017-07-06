@@ -18,23 +18,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
-    <script src="js/php.js"></script>
-    <script src="js/index_functions.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
-
-<script>
-    var nickName = localStorage['nickName'] || 'default';
-    while (nickName === 'default' || nickName === '' || nickName === null) {
-        nickName = prompt('please enter your nickname for scoring:')
-        if (nickName === null) {
-            nickName = 'default';
-        }
-        localStorage['nickName'] = nickName;
-    }
-    updateUserScore(nickName);
-
-</script>
 
 <body>
 <div class="container-fluid text-center">
@@ -119,13 +104,12 @@
             </table>
 
             <div class="row">
-                <button id="changeName" type="button" class="btn btn-default" style="margin-bottom: 10px"
-                        onclick="changeName()">Change Name
+                <button id="changeName" type="button" class="btn btn-default" style="margin-bottom: 10px">Change Name
                 </button>
 
             </div>
             <div class="row">
-                <button id="nextLevel" type="button" class="btn btn-default" style="visibility: hidden;" onclick="">
+                <button id="nextLevel" type="button" class="btn btn-default" disabled>
                     Next Level
                 </button>
             </div>
@@ -161,12 +145,6 @@
     </footer>
 </div>
 
-<script>
-    updateHighScores(0);
-    updateHighScores(1);
-    updateHighScores(2);
-</script>
-
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -178,6 +156,8 @@
 
 <!-- Game javascript
 ================================================== -->
+<script src="js/php.js"></script>
+<script src="js/index_functions.js"></script>
 <script src="js/php.js"></script>
 <script src="js/global_variables.js"></script>
 <script src="js/game_logic.js"></script>

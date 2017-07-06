@@ -368,12 +368,15 @@ function cascadeLoop() {
 }
 
 function nextLevel() {
-    level = (level + 1) % 3;
-    changeTab(level);
-    resetProgressBar();
-    create();
-    document.getElementById('nextLevel').style.visibility = 'hidden';
-    document.getElementById('nextLevel').onclick = function () {
+    var gameIDCopy = gameID;
+    return function () {
+        if (gameID === gameIDCopy) {
+            level = (level + 1) % 3;
+            changeTab(level);
+            resetProgressBar();
+            create();
+            document.getElementById('nextLevel').disabled = true;
+        }
     };
 }
 
@@ -387,8 +390,8 @@ function checkWin() {
         });
         winText.anchor.setTo(0.5, 0.5);
         sendScore(nickName, gameID, SCORE, level, true);
-        document.getElementById('nextLevel').style.visibility = 'visible';
-        document.getElementById('nextLevel').onclick = nextLevel;
+        document.getElementById('nextLevel').disabled = false;
+        document.getElementById('nextLevel').onclick = nextLevel();
     } else if (MOVES_LEFT === 0) {
         TERMINATED = true;
         var winText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over', {
@@ -397,8 +400,8 @@ function checkWin() {
         });
         winText.anchor.setTo(0.5, 0.5);
         sendScore(nickName, gameID, SCORE, level, false);
-        document.getElementById('nextLevel').style.visibility = 'visible';
-        document.getElementById('nextLevel').onclick = nextLevel;
+        document.getElementById('nextLevel').disabled = false;
+        document.getElementById('nextLevel').onclick = nextLevel();
     }
 }
 
