@@ -377,7 +377,7 @@ function nextLevel() {
             level = (level + 1) % 3;
             changeTab(level);
             resetProgressBar();
-            create();
+            playState.create();
             document.getElementById('nextLevel').style.visibility = 'hidden';
             document.getElementById('nextLevel').style.margin = '0px';
         }
