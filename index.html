@@ -24,9 +24,12 @@
 </head>
 
 <script>
-    var nickName = localStorage['nickName'] || null;
-    while (nickName === null || nickName === '') {
+    var nickName = localStorage['nickName'] || 'default';
+    while (nickName === 'default' || nickName === '' || nickName === null) {
         nickName = prompt('please enter your nickname for scoring:')
+        if (nickName === null) {
+            nickName = 'default';
+        }
         localStorage['nickName'] = nickName;
     }
     updateUserScore(nickName);

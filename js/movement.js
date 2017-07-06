@@ -13,8 +13,15 @@ var findMatchesResult;
 
 function gemSelect(e) {
     if (canPick && !TERMINATED) {
-        newRow = Math.floor((game.input.mousePointer.y - MARGIN_V) / CELL);
-        newCol = Math.floor((game.input.mousePointer.x - MARGIN_H) / CELL);
+
+        if (isMobile) {
+            newRow = Math.floor((game.input.pointer1.y - MARGIN_V) / CELL);
+            newCol = Math.floor((game.input.pointer1.x - MARGIN_H) / CELL);
+        } else {
+            newRow = Math.floor((game.input.mousePointer.y - MARGIN_V) / CELL);
+            newCol = Math.floor((game.input.mousePointer.x - MARGIN_H) / CELL);
+        }
+
 
         var pickedOrb = gemAt(newRow, newCol);
         if (pickedOrb !== -1) {

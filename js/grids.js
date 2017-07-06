@@ -155,6 +155,8 @@ function createGemSprite(type, row, col) {
     gem.anchor.setTo(0.5, 0.5);
     gem.width = SPRITE_SIZE;
     gem.height = SPRITE_SIZE;
+    gem.inputEnabled = true;
+    // gem.events.onInputDown.add(gemSelect);
 
     // animations
     gem.animations.add('explode', [1, 2, 3, 4, 5, 6, 7, 8, 9], 25, false);
