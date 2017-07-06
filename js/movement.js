@@ -145,8 +145,8 @@ function updateScore() {
     SCORE += 100 * CASCADE * (removals.length + bonuses.length + 2 * bonusesRemoved + 5 * tempMedalFreed);
     tempMedalFreed = 0;
     var scoreT = ("        " + SCORE).slice(-8);
-    scroreT = 'Score: ' + scoreT;
-    scoreText.setText(scroreT);
+    scoreT = 'Score: ' + scoreT;
+    scoreText.setText(scoreT);
 }
 
 function moveMade() {
@@ -408,12 +408,12 @@ function checkWin() {
 }
 
 function extrapolateScore() {
-    avgPerMove = SCORE / (TOTAL_MOVES - MOVES_LEFT);
-    bonusPoints = Math.floor(avgPerMove * MOVES_LEFT);
+    var avgPerMove = SCORE / (TOTAL_MOVES - MOVES_LEFT);
+    var bonusPoints = Math.floor(avgPerMove * MOVES_LEFT);
 
     SCORE += bonusPoints;
     tempMedalFreed = 0;
     var scoreT = ("        " + SCORE).slice(-8);
-    scroreT = 'Score: ' + scoreT;
-    scoreText.setText(scroreT);
+    scoreT = 'Score: ' + scoreT;
+    scoreText.setText(scoreT);
 }

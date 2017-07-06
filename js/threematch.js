@@ -1,6 +1,11 @@
 // var score = 0;
 // var scoreText;
 
+var scoreText;
+var movesText;
+var medalsText;
+var levelText;
+
 document.getElementById('progress').style.width = WIDTH + 'px';
 
 // the game
