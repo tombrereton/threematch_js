@@ -1,12 +1,10 @@
 function startFile(gameID, moves, medals) {
     $.post('php/start_file.php', {gameID: gameID, moves: moves, medals: medals}, function (data, state) {
-        console.log(data);
     });
 }
 
 function sendData(gameID, lineNumber, dataString) {
     $.post('php/add_data.php', {gameID: gameID, dataString: lineNumber + '\t' + dataString}, function (data, state) {
-        console.log(data);
     });
 }
 

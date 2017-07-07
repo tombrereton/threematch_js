@@ -240,7 +240,13 @@ function freeMedals() {
 
 function removeMedal(row, col) {
     decrementMedalCount();
-    tempMedalFreed++;
+
+    // reduce cascade by 1 as it is incremented before it gets here
+    var medalScoreValue = 40;
+    SCORE += 100 * (CASCADE - 1) * (medalScoreValue);
+    var scoreT = ("        " + SCORE).slice(-8);
+    scoreT = 'Score: ' + scoreT;
+    scoreText.setText(scoreT);
 
     // row,col is top left corner of medal
     var medalSprite = medalArray[row][col].medalSprite;

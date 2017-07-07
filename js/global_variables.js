@@ -84,7 +84,6 @@ var medalState = [];
 // on screen text variables
 var SCORE = 0;
 var medalsLeft; // = LEVEL_1_TOTAL_MEDALS;
-var tempMedalFreed = 0;
 // var fontSizeColour = {fontSize: '26px', fill: '#000'};
 var fontSizeColour = {fontSize: (26 * HEIGHT / 600) + 'px', fill: '#000'};
 

@@ -142,8 +142,10 @@ function gemMove(event, pX, pY) {
 }
 
 function updateScore() {
-    SCORE += 100 * CASCADE * (removals.length + bonuses.length + 2 * bonusesRemoved + 5 * tempMedalFreed);
-    tempMedalFreed = 0;
+    // medal score is added in removeMedal function
+    SCORE += 100 * CASCADE * (removals.length + bonuses.length + 5 * bonusesRemoved );
+    console.log('mv:147');
+    console.log(CASCADE);
     var scoreT = ("        " + SCORE).slice(-8);
     scoreT = 'Score: ' + scoreT;
     scoreText.setText(scoreT);
@@ -410,10 +412,7 @@ function checkWin() {
 
 function extrapolateScore() {
     var avgPerMove = SCORE / (TOTAL_MOVES - MOVES_LEFT);
-    var bonusPoints = Math.floor(avgPerMove * MOVES_LEFT);
-
-    SCORE += bonusPoints;
-    tempMedalFreed = 0;
+    SCORE += Math.floor(avgPerMove * MOVES_LEFT);
     var scoreT = ("        " + SCORE).slice(-8);
     scoreT = 'Score: ' + scoreT;
     scoreText.setText(scoreT);
