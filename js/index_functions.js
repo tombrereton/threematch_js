@@ -44,3 +44,5 @@ function changeTab(level) {
     document.getElementById(tabHeader).classList.add('active');
     document.getElementById(tabPane).classList.add('active');
 }
+
+

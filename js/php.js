@@ -34,7 +34,6 @@ function updateHighScores(level) {
         } else if (level === 2) {
             document.getElementById('Level2').innerHTML = data;
         }
-
         if (--count === 0) {
             if (nickName) {
                 updateUserScore(nickName);
@@ -49,5 +48,8 @@ function updateUserScore(nickname) {
     $.post('php/scores_db.php', {operationType: 'getUserScore', nickname: nickname}, function (data, state) {
         document.getElementById('userScoreTitle').innerHTML = "High Score: " + nickname;
         document.getElementById('userHighScore').innerHTML = data;
+        $(document).profanityFilter({
+            externalSwears: 'js/swearWords.json',
+        });
     });
 }
