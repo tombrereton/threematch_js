@@ -8,6 +8,7 @@ var swapLocations;
 
 var moving;
 var removing;
+var shuffling;
 var flip;
 var findMatchesResult;
 
@@ -313,17 +314,66 @@ function wiggle(aProgress, aPeriod1, aPeriod2) {
     return Math.sin(current1) * Math.cos(current2);
 }
 
+function shuffle(array) {
+    var i, j, x;
+    for (i = array.length; 0 < i; i--) {
+        j = Math.floor(i * Math.random());
+        x = array[i - 1];
+        array[i - 1] = array[j];
+        array[j] = x;
+    }
+}
+
+function shuffleGems() {
+    var shuffling = ROWS * COLS;
+    var targets = [];
+    var temp = [];
+    var i, j, gem, target, c = 0, gemSprite, tween, yPix, xPix;
+
+    for (i = 0; i < ROWS; i++) {
+        for (j = 0; j < COLS; j++) {
+            targets.push([i, j]);
+        }
+    }
+
+    shuffle(targets);
+
+    for (i = 0; i < ROWS; i++) {
+        for (j = 0; j < COLS; j++) {
+            gem = gemArray[i][j];
+            target = targets[c++];
+            gemSprite = gem.gemSprite;
+            yPix = MARGIN_V + (target[0] + 0.5) * CELL;
+            xPix = MARGIN_H + (target[1] + 0.5) * CELL;
+            tween = game.add.tween(gemSprite).to({y: yPix, x: xPix}, FALL_SPEED, FALL_ANIMATION, true);
+            tween.onComplete.add(function () {
+                shuffling--;
+                shuffleLoop();
+            });
+            temp.push([target, gem]);
+        }
+    }
+
+    for (var k = 0; k < temp.length; k++) {
+        target = temp[k][0];
+        gem = temp[k][1];
+        gemArray[target[0]][target[1]] = gem;
+    }
+
+
+}
 
 function handleMatches() {
     CASCADE = 1;
     moving = 0;
     removing = 0;
+    shuffling = 0;
     findMatchesResult = true;
     initialHandling();
 }
 
 function initialHandling() {
-    if (0 !== moving) {
+    if (0 !== moving || 0 !== shuffling) {
         // Gems still moving
         return;
     } else if (findMatchesResult) {
@@ -334,11 +384,8 @@ function initialHandling() {
         cascadeLoop();
     } else {
         // No matches exist
-        canPick = true;
-        selectedOrb = null;
-        checkWin();
-        sendData(gameID, lineNumber++, getProgressState());
-        sendData(gameID, lineNumber++, getGameState());
+        shuffling = 0;
+        shuffleLoop();
     }
 }
 
@@ -364,6 +411,28 @@ function cascadeLoop() {
         findMatchesResult = findMatches();
         CASCADE++;
         initialHandling();
+    }
+}
+
+function shuffleLoop() {
+    if (0 !== shuffling)  {
+        // Still shuffling
+        return;
+    } else if(findMoves()) {
+        // Moves found
+        if (findMatchesResult) {
+            initialHandling();
+        } else {
+            canPick = true;
+            selectedOrb = null;
+            checkWin();
+            sendData(gameID, lineNumber++, getProgressState());
+            sendData(gameID, lineNumber++, getGameState());
+        }
+    } else {
+        // No moves found
+        shuffleGems();
+        findMatchesResult = findMatches();
     }
 }
 
