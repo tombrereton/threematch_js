@@ -370,21 +370,16 @@ function cascadeLoop() {
 }
 
 function nextLevel() {
+    level = (level + 1) % 3;
+    changeTab(level);
+    resetProgressBar();
+    game.input.onDown.add(playState.create);
 
-    var gameIDCopy = gameID;
-    if (gameID === gameIDCopy) {
-        level = (level + 1) % 3;
-        changeTab(level);
-        resetProgressBar();
-        game.input.onDown.add(playState.create);
-
-        var nextLevelText = game.add.text(game.world.centerX, game.world.centerY + HEIGHT / 4, 'Click for next level', {
-            font: 'bold 32pt Helvetica',
-            fill: '#000'
-        });
-        nextLevelText.anchor.setTo(0.5, 0.5);
-    }
-
+    var nextLevelText = game.add.text(game.world.centerX, game.world.centerY + HEIGHT / 4, 'Click for next level', {
+        font: 'bold 32pt Helvetica',
+        fill: '#000'
+    });
+    nextLevelText.anchor.setTo(0.5, 0.5);
 }
 
 function checkWin() {

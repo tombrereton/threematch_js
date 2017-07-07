@@ -34,6 +34,14 @@ function updateHighScores(level) {
         } else if (level === 2) {
             document.getElementById('Level2').innerHTML = data;
         }
+
+        if (--count === 0) {
+            if (nickName) {
+                updateUserScore(nickName);
+            } else {
+                changeName();
+            }
+        }
     });
 }
 
