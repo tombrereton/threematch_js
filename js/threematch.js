@@ -9,18 +9,11 @@ game.state.add('play', playState);
 
 game.state.start('load');
 
-
 document.getElementById('changeName').onclick = changeName;
+
+var nickName = localStorage['nickName'] || '';
+var count = 3;
 
 updateHighScores(0);
 updateHighScores(1);
 updateHighScores(2);
-
-var nickName = localStorage['nickName'] || null;
-
-if (nickName === null || nickName === '') {
-    changeName();
-} else {
-    updateUserScore(nickName);
-}
-

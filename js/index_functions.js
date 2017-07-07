@@ -25,9 +25,9 @@ function changeName() {
     if (!nickName) {
         // User cancelled prompt or just pressed enter
         nickName = 'default';
-        localStorage['nickname'] = undefined;
+        localStorage['nickName'] = '';
     } else {
-        localStorage['nickname'] = nickName;
+        localStorage['nickName'] = nickName;
     }
     updateUserScore(nickName);
 }
