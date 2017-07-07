@@ -24,8 +24,8 @@ $db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$pass
 
 function insertScore($nickname, $score, $gameID, $level, $win)
 {
-    $nickname = preg_replace('/[^\w_ -]+/', '', $nickname);
-    if ($nickname) {
+    $nickname = preg_replace('/[^\w ]+/', '', $nickname);
+    if (0 < srtlen($nickname) && strlen($nickname) <= 20) {
         global $db;
         $result = pg_prepare($db, 'insertScore', "INSERT INTO scores (nickname, score, game_id, level, win) VALUES ($1,$2,$3,$4,$5)");
         $result = pg_execute($db, 'insertScore', array($nickname, $score, $gameID, $level, $win));

@@ -21,13 +21,25 @@ function resetProgressBar() {
 }
 
 function changeName() {
-    nickName = prompt('please enter your nickname for scoring:');
-    if (!nickName) {
-        // User cancelled prompt or just pressed enter
-        nickName = 'default';
-        localStorage['nickName'] = '';
-    } else {
-        localStorage['nickName'] = nickName;
+    var promtString = 'please enter your nickname for scoring:';
+    nickName = '';
+    while (!nickName) {
+        nickName = prompt(promtString);
+        if (!nickName || nickName.match(/^ +$/)) {
+            // User declined to provide nickname
+            nickName = 'default';
+            localStorage['nickName'] = '';
+        } else if (nickName.match(/^.{21,}$/)) {
+            // User provided a long nickname
+            promtString = 'please enter your nickname for scoring, 20 characters max:';
+            nickName = '';
+        } else if (nickName.match(/[^\w ]/)) {
+            // User provided a bad nickName
+            promtString = 'please enter your nickname for scoring, alphanumerics and spaces only:';
+            nickName = '';
+        } else {
+            localStorage['nickName'] = nickName;
+        }
     }
     updateUserScore(nickName);
 }
