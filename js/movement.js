@@ -144,8 +144,6 @@ function gemMove(event, pX, pY) {
 function updateScore() {
     // medal score is added in removeMedal function
     SCORE += 100 * CASCADE * (removals.length + bonuses.length + 5 * bonusesRemoved );
-    console.log('mv:147');
-    console.log(CASCADE);
     var scoreT = ("        " + SCORE).slice(-8);
     scoreT = 'Score: ' + scoreT;
     scoreText.setText(scoreT);
