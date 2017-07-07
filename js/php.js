@@ -49,7 +49,7 @@ function updateUserScore(nickname) {
         document.getElementById('userScoreTitle').innerHTML = "High Score: " + nickname;
         document.getElementById('userHighScore').innerHTML = data;
         $(document).profanityFilter({
-            externalSwears: 'js/swearWords.json',
+            externalSwears: 'js/swearWords.json'
         });
     });
 }

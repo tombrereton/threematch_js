@@ -194,7 +194,7 @@ function gemDeselect(e) {
 function removeGems() {
     removing = removals.length + bonuses.length;
 
-    for (var i in removals) {
+    for (var i = 0; i < removals.length; i++) {
 
         var r = removals[i].y;
         var c = removals[i].x;
@@ -219,7 +219,7 @@ function removeGems() {
 
 function addBonuses() {
 
-    for (var i in bonuses) {
+    for (var i = 0; i < bonuses.length; i++) {
 
         var r = bonuses[i].y;
         var c = bonuses[i].x;
