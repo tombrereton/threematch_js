@@ -337,7 +337,7 @@ function initialHandling() {
         canPick = true;
         selectedOrb = null;
         checkWin();
-        sendData(gameID, lineNumber++, getProgressState());
+        sendData(gameID, lineNumber++, getAction());
         sendData(gameID, lineNumber++, getGameState());
     }
 }
