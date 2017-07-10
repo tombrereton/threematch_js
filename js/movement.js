@@ -67,8 +67,6 @@ function gemSelect(e) {
 
 function swapGems(gem1, gem2, swapBack) {
     canPick = false;
-    console.log('sg:70')
-    console.log(gemArray)
     gemArrayCopy = $.extend(true, [], gemArray);
 
     var gem1Sprite = gemArray[getGemRow(gem1)][getGemCol(gem1)].gemSprite;

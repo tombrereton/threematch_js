@@ -314,9 +314,6 @@ function getAction() {
 function getGameState() {
     var medalsUncovered = totalMedals - medalsLeft;
     var gameState = '' + SCORE + '\t' + medalsUncovered + '\t';
-    console.log('grid:317')
-    console.log(gemArrayCopy)
-    console.log(gemArray)
 
     for (var i = 0; i < ROWS; i++) {
         for (var j = 0; j < COLS; j++) {
