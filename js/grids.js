@@ -255,7 +255,9 @@ function removeMedal(row, col) {
     game.world.bringToTop(removedMedalGroup);
 
     // on complete
-    medalSprite.events.onAnimationComplete.add(killSprite);
+    medalSprite.events.onAnimationComplete.add(function () {
+        medalSprite.kill();
+    });
 
     medalSprite.scale.setTo(2);
     medalSprite.x = game.world.centerX;
@@ -263,18 +265,13 @@ function removeMedal(row, col) {
     medalSprite.anchor.setTo(0.5, 0.5);
     medalSprite.play('spin');
 
+    for (var i = 0; i < 2; i++) {
+        for (var j = 0; j < 2; j++) {
+            // get medal details
+            var r = row + i;
+            var c = col + j;
 
-    function killSprite() {
-        for (var i = 0; i < 2; i++) {
-            for (var j = 0; j < 2; j++) {
-
-                // get medal details
-                var r = row + i;
-                var c = col + j;
-
-                medalSprite.kill();
-                medalArray[r][c] = -1;
-            }
+            medalArray[r][c] = -1;
         }
     }
 }
