@@ -314,10 +314,13 @@ function getAction() {
 function getGameState() {
     var medalsUncovered = totalMedals - medalsLeft;
     var gameState = '' + SCORE + '\t' + medalsUncovered + '\t';
+    console.log('grid:317')
+    console.log(gemArrayCopy)
+    console.log(gemArray)
 
     for (var i = 0; i < ROWS; i++) {
         for (var j = 0; j < COLS; j++) {
-            var s = gemArray[i][j].gemType + '\t' + gemArray[i][j].bonusType + '\t';
+            var s = gemArrayCopy[i][j].gemType + '\t' + gemArrayCopy[i][j].bonusType + '\t';
 
             var ice = -1;
             if (iceArray[i][j] !== -1) {

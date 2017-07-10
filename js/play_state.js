@@ -38,8 +38,8 @@ var playState = {
         initGemGrid(gemGroup);
 
         startFile(gameID, MOVES_LEFT, medalsLeft);
-        sendData(gameID, lineNumber++, 'start');
-        sendData(gameID, lineNumber++, getGameState());
+        // sendData(gameID, lineNumber++, 'start');
+        // sendData(gameID, lineNumber++, getGameState());
 
         // add functions for clicking on gems
         game.input.onDown.add(gemSelect);
