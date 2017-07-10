@@ -41,6 +41,7 @@ function updateHighScores(level) {
                 changeName();
             }
         }
+        censorProfanity();
     });
 }
 
@@ -48,8 +49,6 @@ function updateUserScore(nickname) {
     $.post('php/scores_db.php', {operationType: 'getUserScore', nickname: nickname}, function (data, state) {
         document.getElementById('userScoreTitle').innerHTML = "High Score: " + nickname;
         document.getElementById('userHighScore').innerHTML = data;
-        $(document).profanityFilter({
-            externalSwears: 'js/swearWords.json'
-        });
+        censorProfanity();
     });
 }
