@@ -543,19 +543,10 @@ function play(y0, x0, y1, x1) {
 }
 
 function findMoves() {
-    var one_off_patterns = [[[0, 1], [1, 0], [2, 0]],
-        [[0, 1], [1, 1], [2, 0]],
-        [[0, 0], [1, 1], [2, 0]],
-        [[0, 1], [1, 0], [2, 1]],
-        [[0, 0], [1, 0], [2, 1]],
-        [[0, 0], [1, 1], [2, 1]],
-        [[0, 0], [0, 2], [0, 3]],
-        [[0, 0], [0, 1], [0, 3]]];
-
     for (var i = 0; i < gemArray.length; i++) {
         for (var j = 0; j < gemArray[i].length; j++) {
-            for (var k in one_off_patterns) {
-                var p = one_off_patterns[k];
+            for (var k = 0; k < oneOffPatterns.length; k++) {
+                var p = oneOffPatterns[k];
 
                 if (getGem(i + p[0][0], j + p[0][1]) !== -1 &&
                     getGem(i + p[0][0], j + p[0][1]) === getGem(i + p[1][0], j + p[1][1]) &&
