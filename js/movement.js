@@ -6,8 +6,7 @@ var oldRow;
 var oldCol;
 var swapLocations;
 
-var moving;
-var removing;
+var progress;
 var flip;
 var findMatchesResult;
 
@@ -192,7 +191,7 @@ function gemDeselect(e) {
 }
 
 function removeGems() {
-    removing = removals.length + bonuses.length;
+    progress += removals.length + bonuses.length;
 
     for (var i in removals) {
 
@@ -206,7 +205,7 @@ function removeGems() {
         removeIce(r, c);
 
         function killGem() {
-            removing--;
+            progress--;
             cascadeLoop();
         }
 
@@ -245,7 +244,7 @@ function addBonuses() {
         bonusTween.start();
 
         bonusTween4.onComplete.add(function () {
-            removing--;
+            progress--;
             cascadeLoop();
         })
     }
@@ -254,7 +253,7 @@ function addBonuses() {
 }
 
 function moveGems() {
-    moving += movements.length;
+    progress += movements.length;
     for (var i = 0; i < movements.length; i++) {
         var newRow = movements[i][0];
         var newCol = movements[i][1];
@@ -267,8 +266,8 @@ function moveGems() {
         var gemTween = game.add.tween(gemSprite).to({y: row_coord}, FALL_SPEED, FALL_ANIMATION, true);
 
         gemTween.onComplete.add(function () {
-            moving--;
-            shuffleLoop();
+            progress--;
+            matchesLoop();
         });
 
         // swap in gemArray
@@ -282,7 +281,7 @@ function addGemsAbove() {
     for (var col = 0; col < additions.length; col++) {
 
         var gemsToBeAdded = additions[col];
-        moving += gemsToBeAdded;
+        progress += gemsToBeAdded;
 
         for (var rowAbove = 0; rowAbove < gemsToBeAdded; rowAbove++) {
 
@@ -295,8 +294,8 @@ function addGemsAbove() {
 
             // on tween complete try finding more matches
             gemTween.onComplete.add(function () {
-                moving--;
-                shuffleLoop();
+                progress--;
+                matchesLoop();
             });
 
             // add new gem to grid with sprite that is added above
@@ -304,7 +303,6 @@ function addGemsAbove() {
         }
     }
 }
-
 
 function wiggle(aProgress, aPeriod1, aPeriod2) {
     var current1 = aProgress * Math.PI * 2 * aPeriod1;
@@ -324,58 +322,67 @@ function shuffle(array) {
 }
 
 function shuffleGems() {
-    moving += ROWS * COLS;
-    var targets = [];
     var temp = [];
-    var i, j, gem, target, c = 0, gemSprite, tween, yPix, xPix;
+    var i, j;
 
     for (i = 0; i < ROWS; i++) {
         for (j = 0; j < COLS; j++) {
-            targets.push([i, j]);
+            temp.push(gemArray[i][j]);
         }
     }
 
-    shuffle(targets);
+    shuffle(temp);
 
     for (i = 0; i < ROWS; i++) {
         for (j = 0; j < COLS; j++) {
-            gem = gemArray[i][j];
-            target = targets[c++];
-            gemSprite = gem.gemSprite;
-            yPix = MARGIN_V + (target[0] + 0.5) * CELL;
-            xPix = MARGIN_H + (target[1] + 0.5) * CELL;
-            tween = game.add.tween(gemSprite).to({y: yPix, x: xPix}, FALL_SPEED, FALL_ANIMATION, true);
+            gemArray[i][j] = temp.pop();
+        }
+    }
+}
+
+function shuffleGemsAnimation(endFunction) {
+    progress += ROWS * COLS;
+
+    for (var i = 0; i < ROWS; i++) {
+        for (var j = 0; j < COLS; j++) {
+            yPix = MARGIN_V + (i + 0.5) * CELL;
+            xPix = MARGIN_H + (j + 0.5) * CELL;
+            var tween = game.add.tween(gemArray[i][j].gemSprite).to({y: yPix, x: xPix}, FALL_SPEED, FALL_ANIMATION, true);
             tween.onComplete.add(function () {
-                moving--;
-                shuffleLoop();
+                progress--;
+                if (progress === 0) {
+                    endFunction();
+                }
             });
-            temp.push([target, gem]);
         }
-    }
-
-    for (var k = 0; k < temp.length; k++) {
-        target = temp[k][0];
-        gem = temp[k][1];
-        gemArray[target[0]][target[1]] = gem;
     }
 }
 
 function handleMatches() {
     // Start to handle matches
-    // This is called when matches exist so:
-    findMatchesResult = true;
     // This is the first time round, set cascade to 1
     CASCADE = 1;
     // Set moving and removing to 0, these help control the looping
-    moving = 0;
-    removing = 0;
-    // Start the loop
-    handleMatchesLoop();
+    progress = 0;
+    // Start the matches loop
+    matchesLoop();
 }
 
-function handleMatchesLoop() {
-    if (0 !== moving) {
-        // If there are gems moving do nothing
+function returnControl() {
+    // No matches and moves available, return control to player
+    canPick = true;
+    // Clear selection
+    selectedOrb = null;
+    // Check if the player has won
+    checkWin();
+    // Send data to the server
+    sendData(gameID, lineNumber++, getProgressState());
+    sendData(gameID, lineNumber++, getGameState());
+}
+
+function matchesLoop() {
+    if (0 !== progress) {
+        // Do nothing
     } else if (findMatches()) {
         // Matches exist
         // Find bonuses created
@@ -387,22 +394,14 @@ function handleMatchesLoop() {
         // Start the cascade loop, this repeatedly activates bonuses
         cascadeLoop();
     } else {
-        // There are mo matches left
-        // Return control to the player
-        canPick = true;
-        // Clear selection
-        selectedOrb = null;
-        // Check if the player has won
-        checkWin();
-        // Send data to the server
-        sendData(gameID, lineNumber++, getProgressState());
-        sendData(gameID, lineNumber++, getGameState());
+        // There are mo matches left, go to shuffle loop to check for moves
+        shuffleLoop(returnControl);
     }
 }
 
 function cascadeLoop() {
-    if (0 !== removing) {
-        // If there are gems still being removed do nothing
+    if (0 !== progress) {
+        // Do nothing
     } else if (obArrayNonEmpty(breakingFromRow) || obArrayNonEmpty(breakingFromColumn)) {
         // There are 'breaking' gems
         // Clear the object array of removals
@@ -430,25 +429,24 @@ function cascadeLoop() {
         addGemsAbove();
         // Increment cascade so additional matches after falling are worth more points
         CASCADE++;
-        // Start shuffle loop
-        shuffleLoop();
+        // Run matches loop
+        matchesLoop();
     }
 }
 
-function shuffleLoop() {
-    if (0 !== moving)  {
-        // If there are still gems moving do nothing
-    } else if(!findMoves() && !findMatches()) {
-        // There are no moves possible and no matches, gems need to be shuffled
-        // Sets gems moving, adds callback to this function
+function shuffleLoop(endFunction) {
+    var shuffled = false;
+    while (!findMoves() || findMatches()) {
         shuffleGems();
-        // Reset cascade
-        CASCADE = 1;
-        // Loops this function
-        shuffleLoop();
+        shuffled = true;
+    }
+
+    if (shuffled) {
+        setTimeout(function () {
+            shuffleGemsAnimation(endFunction)
+        }, 0);
     } else {
-        // Either moves or matches have been created
-        handleMatchesLoop();
+        endFunction();
     }
 }
 
@@ -466,7 +464,7 @@ function nextLevel() {
 }
 
 function checkWin() {
-    if (medalsLeft === 0) {
+    if (false && medalsLeft === 0) {
         TERMINATED = true;
         extrapolateScore();
         var winText = game.add.text(game.world.centerX, game.world.centerY, 'You Won!', {
@@ -476,7 +474,7 @@ function checkWin() {
         winText.anchor.setTo(0.5, 0.5);
         sendScore(nickName, gameID, SCORE, level, true);
         nextLevel();
-    } else if (MOVES_LEFT === 0) {
+    } else if (false && MOVES_LEFT === 0) {
         TERMINATED = true;
         var winText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over', {
             font: 'bold 40pt Arial',

@@ -1,6 +1,6 @@
 // Shared variables
-var ROWS = 4;
-var COLS = 4;
+var ROWS = 9;
+var COLS = 9;
 
 // Game variables
 var LEVEL_1_TOTAL_MEDALS = 3;
@@ -16,10 +16,8 @@ var RANDOM_SEED = undefined; // Set to NONE to use current system time
 var TERMINATED = false;
 
 var level = 0;
-// var medalsPerLevel = [3, 4, 5];
-// var iceRowsPerLevel = [5, 7, 9];
-var medalsPerLevel = [1, 1, 1];
-var iceRowsPerLevel = [ROWS, ROWS, ROWS];
+var medalsPerLevel = [3, 4, 5];
+var iceRowsPerLevel = [5, 7, 9];
 var movesPerLevel = [20, 25, 30];
 var totalMedals;
 var lineNumber;
