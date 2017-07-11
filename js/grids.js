@@ -300,24 +300,21 @@ function addGem(row, col, gemType, bonusType) {
 
 }
 
-function getProgressState() {
-    var medalsUncovered = totalMedals - medalsLeft;
-    var score = SCORE;
+function getAction() {
     var action = swapLocations;
 
     action = action[0][0].valueOf() + '-' + action[0][1] + '-' + action[1][0] + '-' + action[1][1];
 
-    var progress = medalsUncovered.valueOf() + '\t' + SCORE.valueOf() + '\t' + action;
-
-    return progress;
+    return action;
 }
 
 function getGameState() {
-    var gameState = '';
+    var medalsUncovered = totalMedals - medalsLeft;
+    var gameState = '' + SCORE + '\t' + medalsUncovered + '\t';
 
     for (var i = 0; i < ROWS; i++) {
         for (var j = 0; j < COLS; j++) {
-            var s = gemArray[i][j].gemType + '\t' + gemArray[i][j].bonusType + '\t';
+            var s = gemArrayCopy[i][j].gemType + '\t' + gemArrayCopy[i][j].bonusType + '\t';
 
             var ice = -1;
             if (iceArray[i][j] !== -1) {

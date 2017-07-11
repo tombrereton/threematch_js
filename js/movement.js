@@ -66,6 +66,7 @@ function gemSelect(e) {
 
 function swapGems(gem1, gem2, swapBack) {
     canPick = false;
+    gemArrayCopy = $.extend(true, [], gemArray);
 
     var gem1Sprite = gemArray[getGemRow(gem1)][getGemCol(gem1)].gemSprite;
     var gem2Sprite = gemArray[getGemRow(gem2)][getGemCol(gem2)].gemSprite;
@@ -91,6 +92,8 @@ function swapGems(gem1, gem2, swapBack) {
             swapGems(gem1, gem2, false);
         } else if (matchFound) {
             moveMade();
+            sendData(gameID, lineNumber++, getGameState());
+            sendData(gameID, lineNumber++, getAction());
             handleMatches();
             selectedOrb = null;
         } else {
@@ -193,7 +196,7 @@ function gemDeselect(e) {
 function removeGems() {
     progress += removals.length + bonuses.length;
 
-    for (var i in removals) {
+    for (var i = 0; i < removals.length; i++) {
 
         var r = removals[i].y;
         var c = removals[i].x;
@@ -218,7 +221,7 @@ function removeGems() {
 
 function addBonuses() {
 
-    for (var i in bonuses) {
+    for (var i = 0; i < bonuses.length; i++) {
 
         var r = bonuses[i].y;
         var c = bonuses[i].x;
@@ -357,7 +360,6 @@ function shuffleGemsAnimation(endFunction) {
         }
     }
 }
-
 function handleMatches() {
     // Start to handle matches
     // This is the first time round, set cascade to 1
@@ -375,9 +377,6 @@ function returnControl() {
     selectedOrb = null;
     // Check if the player has won
     checkWin();
-    // Send data to the server
-    sendData(gameID, lineNumber++, getProgressState());
-    sendData(gameID, lineNumber++, getGameState());
 }
 
 function matchesLoop() {
@@ -464,7 +463,7 @@ function nextLevel() {
 }
 
 function checkWin() {
-    if (false && medalsLeft === 0) {
+    if (medalsLeft === 0) {
         TERMINATED = true;
         extrapolateScore();
         var winText = game.add.text(game.world.centerX, game.world.centerY, 'You Won!', {
@@ -472,15 +471,19 @@ function checkWin() {
             fill: '#000'
         });
         winText.anchor.setTo(0.5, 0.5);
+        sendData(gameID, lineNumber++, getGameState());
+        sendData(gameID, lineNumber++, '-1--1--1--1');
         sendScore(nickName, gameID, SCORE, level, true);
         nextLevel();
-    } else if (false && MOVES_LEFT === 0) {
+    } else if (MOVES_LEFT === 0) {
         TERMINATED = true;
         var winText = game.add.text(game.world.centerX, game.world.centerY, 'Game Over', {
             font: 'bold 40pt Arial',
             fill: '#000'
         });
         winText.anchor.setTo(0.5, 0.5);
+        sendData(gameID, lineNumber++, getGameState());
+        sendData(gameID, lineNumber++, '-1--1--1--1');
         sendScore(nickName, gameID, SCORE, level, false);
         nextLevel();
     }

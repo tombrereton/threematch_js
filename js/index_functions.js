@@ -21,7 +21,7 @@ function resetProgressBar() {
 }
 
 function changeName() {
-    var promtString = 'please enter your nickname for scoring:';
+    var promtString = 'Please enter your nickname for scoring:';
     nickName = '';
     while (!nickName) {
         nickName = prompt(promtString);
@@ -31,11 +31,11 @@ function changeName() {
             localStorage['nickName'] = '';
         } else if (nickName.match(/^.{21,}$/)) {
             // User provided a long nickname
-            promtString = 'please enter your nickname for scoring, 20 characters max:';
+            promtString = 'Please enter your nickname for scoring, 20 characters max:';
             nickName = '';
         } else if (nickName.match(/[^\w ]/)) {
             // User provided a bad nickName
-            promtString = 'please enter your nickname for scoring, alphanumerics and spaces only:';
+            promtString = 'Please enter your nickname for scoring, alphanumerics and spaces only:';
             nickName = '';
         } else {
             localStorage['nickName'] = nickName;
@@ -55,6 +55,12 @@ function changeTab(level) {
     document.getElementById(oldTabPane).classList.remove('active');
     document.getElementById(tabHeader).classList.add('active');
     document.getElementById(tabPane).classList.add('active');
+}
+
+function censorProfanity(){
+    $(document).profanityFilter({
+        externalSwears: 'js/swearWords.json'
+    });
 }
 
 
