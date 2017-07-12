@@ -264,16 +264,6 @@ function removeMedal(row, col) {
     medalSprite.y = game.world.centerY;
     medalSprite.anchor.setTo(0.5, 0.5);
     medalSprite.play('spin');
-
-    for (var i = 0; i < 2; i++) {
-        for (var j = 0; j < 2; j++) {
-            // get medal details
-            var r = row + i;
-            var c = col + j;
-
-            medalArray[r][c] = -1;
-        }
-    }
 }
 
 
@@ -321,7 +311,7 @@ function getGameState() {
                 ice = iceArray[i][j].layer;
             }
 
-            var m = '-1';
+            var m = -1;
             if (medalState[i][j] !== -1) {
                 m = medalState[i][j];
             } else if (iceArray[i][j] === -1 && medalArray[i][j] !== -1) {
