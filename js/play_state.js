@@ -37,6 +37,8 @@ var playState = {
         initIceGrid(iceGroup);
         initGemGrid(gemGroup);
 
+        shuffleLoop(function () {});
+
         startFile(gameID, MOVES_LEFT, medalsLeft);
         // sendData(gameID, lineNumber++, 'start');
         // sendData(gameID, lineNumber++, getGameState());
@@ -55,4 +57,4 @@ var playState = {
         medalsText = game.add.text(inset, HEIGHT - 1 * TEXT_HEIGHT, 'Medals: ' + medalsT, fontSizeColour);
         levelText = game.add.text(WIDTH - WIDTH / 4, HEIGHT - 1 * TEXT_HEIGHT, 'Level: ' + (level + 1), fontSizeColour);
     }
-}
+};

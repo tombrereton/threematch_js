@@ -29,7 +29,7 @@ function objectArray() {
 }
 
 function getGem(i, j) {
-    return i < 0 || ROWS <= i || j < 0 || COLS <= j ? -1 : gemArray[i][j];
+    return i < 0 || ROWS <= i || j < 0 || COLS <= j ? -1 : gemArray[i][j].gemType;
 }
 
 function getGemPlusCoordinates(i, j) {
@@ -49,8 +49,8 @@ function randBonus(bonus) {
 }
 
 function checkInsertion(i, j) {
-    return (getGem(i, j).gemType === getGem(i - 1, j).gemType && getGem(i, j).gemType === getGem(i - 2, j).gemType) ||
-        (getGem(i, j).gemType === getGem(i, j - 1).gemType && getGem(i, j).gemType === getGem(i, j - 2).gemType);
+    return (getGem(i, j) === getGem(i - 1, j) && getGem(i, j) === getGem(i - 2, j)) ||
+        (getGem(i, j) === getGem(i, j - 1) && getGem(i, j) === getGem(i, j - 2));
 }
 
 function makeGrid() {
@@ -531,9 +531,37 @@ function play(y0, x0, y1, x1) {
             effectMovements();
             effectAdditions();
             printGridBonus();
+            while (!findMatches() && !findMoves()) {
+                // shuffleGems
+                printGridBonus();
+            }
         } while (findMatches())
     } else {
         swap(y0, x0, y1, x1);
         printGridBonus();
     }
+}
+
+function findMoves() {
+    for (var i = 0; i < gemArray.length; i++) {
+        for (var j = 0; j < gemArray[i].length; j++) {
+            for (var k = 0; k < oneOffPatterns.length; k++) {
+                var p = oneOffPatterns[k];
+
+                if (getGem(i + p[0][0], j + p[0][1]) !== -1 &&
+                    getGem(i + p[0][0], j + p[0][1]) === getGem(i + p[1][0], j + p[1][1]) &&
+                    getGem(i + p[0][0], j + p[0][1]) === getGem(i + p[2][0], j + p[2][1])) {
+                    return true;
+                }
+
+                if (getGem(i + p[0][1], j + p[0][0]) !== -1 &&
+                    getGem(i + p[0][1], j + p[0][0]) === getGem(i + p[1][1], j + p[1][0]) &&
+                    getGem(i + p[0][1], j + p[0][0]) === getGem(i + p[2][1], j + p[2][0])) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
 }
