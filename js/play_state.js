@@ -53,8 +53,8 @@ var playState = {
         var medalsT = ("      " + medalsLeft).slice(-6);
         var inset = 16 * WIDTH / 450;
         scoreText = game.add.text(inset, HEIGHT - 3 * TEXT_HEIGHT, 'Score: ' + scoreT, fontSizeColour);
-        movesText = game.add.text(inset, HEIGHT - 2 * TEXT_HEIGHT, 'Moves: ' + movesT, fontSizeColour);
-        medalsText = game.add.text(inset, HEIGHT - 1 * TEXT_HEIGHT, 'Medals: ' + medalsT, fontSizeColour);
+        movesText = game.add.text(inset, HEIGHT - 2 * TEXT_HEIGHT, 'Moves left: ' + movesT, fontSizeColour);
+        medalsText = game.add.text(inset, HEIGHT - 1 * TEXT_HEIGHT, 'Medals left: ' + medalsT, fontSizeColour);
         levelText = game.add.text(WIDTH - WIDTH / 4, HEIGHT - 1 * TEXT_HEIGHT, 'Level: ' + (level + 1), fontSizeColour);
     }
 };

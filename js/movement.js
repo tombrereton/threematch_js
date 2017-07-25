@@ -154,7 +154,7 @@ function updateScore() {
 function moveMade() {
     MOVES_LEFT--;
     var movesT = ("      " + MOVES_LEFT).slice(-6);
-    movesT = 'Moves: ' + movesT;
+    movesT = 'Moves left: ' + movesT;
     movesText.setText(movesT);
     updateProgressBar();
 }
@@ -162,7 +162,7 @@ function moveMade() {
 function decrementMedalCount() {
     medalsLeft--;
     var medalsT = ("      " + medalsLeft).slice(-6);
-    medalsT = 'Medals: ' + medalsT;
+    medalsT = 'Medals left: ' + medalsT;
     medalsText.setText(medalsT);
 }
 

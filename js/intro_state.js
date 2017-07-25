@@ -7,19 +7,31 @@ var introState = {
         stone.width = WIDTH;
 
 
-        var startText = game.add.text(game.world.centerX, game.world.centerY - HEIGHT / 4, 'Gem Island', {
-            font: '30px Helvetica',
+        var startText = game.add.text(game.world.centerX, game.world.centerY - HEIGHT * 5 / 16, 'Gem Island', {
+            font: '30px Serif',
             fill: '#000'
         });
         startText.anchor.setTo(0.5);
 
-        var freeMedalText = game.add.text(game.world.centerX, game.world.centerY, 'Free the medals...', {
-            font: '26px Helvetica',
+        var freeMedalText = game.add.text(game.world.centerX, game.world.centerY - HEIGHT * 2 / 16, 'Match 3 or more gems to', {
+            font: '22px Arial',
             fill: '#000'
         });
         freeMedalText.anchor.setTo(0.5);
 
-        var freeMedalText = game.add.text(game.world.centerX, game.world.centerY + HEIGHT * 7 / 16, 'Click to start', {
+        var freeMedalText = game.add.text(game.world.centerX, game.world.centerY - HEIGHT * 1 / 16, 'earn points and clear ice.', {
+            font: '22px Arial',
+            fill: '#000'
+        });
+        freeMedalText.anchor.setTo(0.5);
+
+        var freeMedalText = game.add.text(game.world.centerX, game.world.centerY + HEIGHT * 1 / 16, 'Free the medals under the ice to win!', {
+            font: '22px Arial',
+            fill: '#000'
+        });
+        freeMedalText.anchor.setTo(0.5);
+
+        var freeMedalText = game.add.text(game.world.centerX, game.world.centerY + HEIGHT * 7 / 16, 'Click to start!', {
             font: '26px Helvetica',
             fill: '#000'
         });
@@ -29,21 +41,21 @@ var introState = {
         // add sprite and scale it
         var type = 0;
         var name = "stone" + type + '/01';
-        var gem = game.add.sprite(game.world.centerX - WIDTH * 1 / 8, game.world.centerY - HEIGHT * 3 / 16, 'threematch', name);
+        var gem = game.add.sprite(game.world.centerX - WIDTH * 1 / 8, game.world.centerY - HEIGHT * 4 / 16, 'threematch', name);
         gem.anchor.setTo(0.5, 0.5);
 
         type = 2;
         name = "stone" + type + '/01';
-        var gem = game.add.sprite(game.world.centerX, game.world.centerY - HEIGHT * 3 / 16, 'threematch', name);
+        var gem = game.add.sprite(game.world.centerX, game.world.centerY - HEIGHT * 4 / 16, 'threematch', name);
         gem.anchor.setTo(0.5, 0.5);
 
         type = 3;
         name = "stone" + type + '/01';
-        var gem = game.add.sprite(game.world.centerX + WIDTH * 1 / 8, game.world.centerY - HEIGHT * 3 / 16, 'threematch', name);
+        var gem = game.add.sprite(game.world.centerX + WIDTH * 1 / 8, game.world.centerY - HEIGHT * 4 / 16, 'threematch', name);
         gem.anchor.setTo(0.5, 0.5);
 
 
-        var medal = game.add.sprite(game.world.centerX, game.world.centerY + HEIGHT * 3 / 16, 'threematch', 'medal/01');
+        var medal = game.add.sprite(game.world.centerX, game.world.centerY + HEIGHT * 4 / 16, 'threematch', 'medal/01');
         medal.anchor.setTo(0.5, 0.5);
         medal.width = 2 * (SPRITE_SIZE);
         medal.height = 2 * (SPRITE_SIZE);
