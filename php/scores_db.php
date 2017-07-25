@@ -97,6 +97,20 @@ function getUserHighscore($nickname)
     return $tableString;
 }
 
+// start session
+// save last request time in global session
+// if diff of last time and this time is less than 2 second, exit
+session_start();
+
+if ($_SESSION['last_request_time'] and $_POST['operationType'] == 'sendScore'){
+    if (time() - $_SESSION['last_request_time'] < 2){
+        exit('Too many requests sent.');
+    }
+}
+
+$_SESSION['last_request_time'] = time();
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['operationType'] == 'getHighScores') {
         echo getHighScores($_POST['level']);
