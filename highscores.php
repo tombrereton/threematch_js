@@ -22,6 +22,17 @@
 </head>
 
 <body>
+<?php
+require 'php/db_config.php';
+require 'php/db_functions.php';
+$host = $db_config['host'];
+$port = $db_config['port'];
+$dbname = $db_config['dbname'];
+$user = $db_config['user'];
+$passwd = $db_config['passwd'];
+
+$db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$passwd");
+?>
 <div class="container-fluid text-center">
 
     <div class="row" style="padding:20px;">
@@ -57,10 +68,22 @@
 
     <div class="row">
         <div class="col-lg-4">
-        </div>
-        <div class="col-lg-4" align="center" id="">
+            <h3>Level 1</h3>
+            <?php
+            echo getHighScores(0, 100);
+            ?>
         </div>
         <div class="col-lg-4">
+            <h3>Level 2</h3>
+            <?php
+            echo getHighScores(1, 100);
+            ?>
+        </div>
+        <div class="col-lg-4">
+            <h3>Level 3</h3>
+            <?php
+            echo getHighScores(2, 100);
+            ?>
         </div>
     </div>
 
@@ -68,15 +91,17 @@
     <div class="cover-container">
         <div class="mastfoot">
             <div class="inner">
-                <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a
+                            href="https://twitter.com/mdo">@mdo</a>.</p>
             </div>
         </div>
     </div>
 </div>
 
 
-
-
+<?php
+pg_close($db);
+?>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Latest compiled and minified JavaScript -->
