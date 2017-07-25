@@ -35,6 +35,7 @@ function insertScore($nickname, $score, $gameID, $level, $win)
 function getHighScores($level)
 {
     global $db;
+    $level = preg_replace('/[^\d ]+/', '', $level);
     $query_string = "SELECT nickname, MAX(score) as score FROM scores WHERE level = $1 GROUP BY nickname ORDER BY score DESC LIMIT 10";
     $result = pg_prepare($db, 'getHighScores', $query_string);
     $result = pg_execute($db, 'getHighScores', array($level));
@@ -69,6 +70,7 @@ function getHighScores($level)
 function getUserHighscore($nickname)
 {
     global $db;
+    $nickname = preg_replace('/[^\w ]+/', '', $nickname);
     $query_string = "SELECT rank, nickname, max, level FROM (SELECT " .
         "ROW_NUMBER() OVER(PARTITION BY level ORDER BY max DESC) AS rank, nickname, max, level FROM (SELECT " .
         "nickname, MAX(score), level FROM scores GROUP BY nickname, level) AS max_level) AS ranked_max_level " .
