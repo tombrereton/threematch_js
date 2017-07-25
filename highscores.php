@@ -12,6 +12,7 @@
 
     <title>Gem Island</title>
 
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -21,15 +22,24 @@
 </head>
 
 <body>
+<?php
+require 'php/db_config.php';
+require 'php/db_functions.php';
+$host = $db_config['host'];
+$port = $db_config['port'];
+$dbname = $db_config['dbname'];
+$user = $db_config['user'];
+$passwd = $db_config['passwd'];
 
-
+$db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$passwd");
+?>
 <div class="container-fluid text-center">
 
     <div class="row" style="padding:20px;">
-        <div class="col-sm-4">
+        <div class="col-md-4">
 
         </div>
-        <div class="col-sm-4">
+        <div class="col-md-4">
             <nav class="">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -37,72 +47,70 @@
                     </button>
                     <div id="leftNavbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-left masthead-nav">
-                            <li><a href="/index.html">Gem Island</a></li>
+                            <li class="active"><a href="#">Gem Island</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right masthead-nav">
                         <li><a href="/index.html">Home</a></li>
-                        <li><a href="/highscores.php">High Scores</a></li>
-                        <li class="active"><a href="#">Credits</a></li>
+                        <li class="active"><a href="#">High Scores</a></li>
+                        <li><a href="/credits.html">Credits</a></li>
                         <li><a href="https://github.com/tombrereton/threematch_js">Github</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </nav>
-            <div class="col-sm-4">
-
-            </div>
         </div>
+        <div class="col-md-4">
 
+        </div>
     </div>
+
     <div class="row">
         <div class="col-lg-4">
+            <h3>Level 1</h3>
+            <?php
+            echo getHighScores(0, 100);
+            ?>
         </div>
         <div class="col-lg-4">
-
-            <div class="page-header">
-                <h1>Asset Credits</h1>
-            </div>
-
-            <h4><a href="http://www.freepik.com">Stone background designed by 0melapics /
-                Freepik</a></h4>
-            <h4><a href="http://www.1001.com">Gem design by 1001.com</a></h4>
-            <h4><a href="http://www.kenney.nl">Explosion design by kenney</a></h4>
-
-            <div class="page-header">
-                <h1>Game Authors</h1>
-            </div>
-
-            <!-- List group -->
-            <h4><a href="https://github.com/elliottdavies">Elliott Davies</a></h4>
-            <h4><a href="https://github.com/tombrereton">Tom Brereton</a></h4>
-
-            <div class="page-header">
-                <h1>Acknowledgements</h1>
-            </div>
-            <h4><a href="https://www.memnone.co.uk/">Claudio Zito  - Project Supervisor</a></h4>
-            <h4><a href="">Jack Uttley  - Set up and manages the server</a></h4>
-
+            <h3>Level 2</h3>
+            <?php
+            echo getHighScores(1, 100);
+            ?>
         </div>
-        <div class="col-lg-1">
-        </div>
-        <div class="col-lg-2">
+        <div class="col-lg-4">
+            <h3>Level 3</h3>
+            <?php
+            echo getHighScores(2, 100);
+            ?>
         </div>
     </div>
 
 
-    <footer class="container-fluid text-center">
-        <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a
-                href="https://twitter.com/mdo">@mdo</a>.</p>
-    </footer>
+    <div class="cover-container">
+        <div class="mastfoot">
+            <div class="inner">
+                <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a
+                            href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+<?php
+pg_close($db);
+?>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
 
+<!-- Game javascript
+================================================== -->
 </body>
 </html>
