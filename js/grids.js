@@ -26,7 +26,7 @@ function MedalObject(portion, medalSpite) {
 
 function initMedalGrid(medals, medalGroup) {
     emptyGrid(medalArray);
-    emptyGrid(medalState);
+    // emptyGrid(medalState);
     medalLocations = [];
 
     var i = 0;
@@ -312,11 +312,8 @@ function getGameState() {
             }
 
             var m = -1;
-            if (medalState[i][j] !== -1) {
-                m = medalState[i][j];
-            } else if (iceArray[i][j] === -1 && medalArray[i][j] !== -1) {
+            if (iceArray[i][j] === -1 && medalArray[i][j] !== -1) {
                 m = medalArray[i][j].portion;
-                medalState[i][j] = m;
             }
 
             s = s + ice + '\t' + m + '\t';

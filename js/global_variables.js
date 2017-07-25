@@ -79,7 +79,6 @@ var removedMedalGroup;
 var gemArray = [];
 var iceArray = [];
 var medalArray = [];
-var medalState = [];
 var gemArrayCopy = [];
 
 // on screen text variables
