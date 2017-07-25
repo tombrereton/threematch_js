@@ -1,5 +1,7 @@
 # Three Match
 
+Play the game here: [http://vm-match3.cs.bham.ac.uk/](http://vm-match3.cs.bham.ac.uk/)
+
 A bejeweled/candy crush type game. The aim is to free the medals underneath the ice by matching 3 or more gems of the 
 same type. Matching gems on top of ice removes it and once a medal is fully uncovered it is freed.
 
@@ -15,7 +17,7 @@ Game rules are detailed below.
 
 ## Getting Started
 
-To run this with a simple python server:
+To run this with a simple php server:
 
 ### Prerequisites
 
