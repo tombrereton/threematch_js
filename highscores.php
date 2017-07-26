@@ -24,14 +24,14 @@
 <body>
 <?php
 require 'php/db_config.php';
-require 'php/db_functions.php';
 $host = $db_config['host'];
 $port = $db_config['port'];
 $dbname = $db_config['dbname'];
 $user = $db_config['user'];
 $passwd = $db_config['passwd'];
-
 $db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$passwd");
+
+require 'php/db_functions.php';
 ?>
 <div class="container-fluid text-center">
 
@@ -109,6 +109,13 @@ pg_close($db);
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/jquery.profanityfilter.js"></script>
+<script>
+    $(document).profanityFilter({
+        externalSwears: 'js/swearWords.json'
+    });
+</script>
 
 <!-- Game javascript
 ================================================== -->
