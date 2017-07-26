@@ -19,6 +19,7 @@
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery.profanityfilter.js"></script>
 </head>
 
 <body>
@@ -108,9 +109,7 @@ pg_close($db);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/jquery.profanityfilter.js"></script>
+<!--<script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>-->
 <script>
     $(document).profanityFilter({
         externalSwears: 'js/swearWords.json'
