@@ -25,6 +25,7 @@
 <?php
 require 'php/db_config.php';
 require 'php/db_functions.php';
+
 $host = $db_config['host'];
 $port = $db_config['port'];
 $dbname = $db_config['dbname'];
