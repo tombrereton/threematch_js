@@ -87,7 +87,12 @@ require 'php/db_functions.php';
             ?>
         </div>
     </div>
-
+    
+    <script>
+        $(document).profanityFilter({
+            externalSwears: 'js/swearWords.json'
+        });
+    </script>
 
     <div class="cover-container">
         <div class="mastfoot">
@@ -109,12 +114,6 @@ pg_close($db);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<!--<script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>-->
-<script>
-    $(document).profanityFilter({
-        externalSwears: 'js/swearWords.json'
-    });
-</script>
 
 <!-- Game javascript
 ================================================== -->
