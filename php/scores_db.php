@@ -3,7 +3,6 @@
 // uncomment line in php.ini where it has php-pgsql
 
 require 'db_config.php';
-require 'db_functions.php';
 // make a db_config file and put this inside:
 
 //<?php
@@ -22,6 +21,8 @@ $user = $db_config['user'];
 $passwd = $db_config['passwd'];
 
 $db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$passwd");
+
+require 'db_functions.php';
 
 // start session
 // save last request time in global session
