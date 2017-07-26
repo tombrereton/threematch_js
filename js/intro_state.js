@@ -25,7 +25,13 @@ var introState = {
         });
         freeMedalText.anchor.setTo(0.5);
 
-        var freeMedalText = game.add.text(game.world.centerX, game.world.centerY + HEIGHT * 1 / 16, 'Free the medals under the ice to win!', {
+        var freeMedalText = game.add.text(game.world.centerX, game.world.centerY + HEIGHT * 1 / 16, 'Free the medals under', {
+            font: '22px Arial',
+            fill: '#000'
+        });
+        freeMedalText.anchor.setTo(0.5);
+
+        var freeMedalText = game.add.text(game.world.centerX, game.world.centerY + HEIGHT * 2 / 16, 'the ice to win!', {
             font: '22px Arial',
             fill: '#000'
         });
