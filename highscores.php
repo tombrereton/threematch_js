@@ -71,19 +71,19 @@ $db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$pass
         <div class="col-lg-4">
             <h3>Level 1</h3>
             <?php
-            echo getHighScores(0, 100);
+            echo getHighScores(0, 50);
             ?>
         </div>
         <div class="col-lg-4">
             <h3>Level 2</h3>
             <?php
-            echo getHighScores(1, 100);
+            echo getHighScores(1, 50);
             ?>
         </div>
         <div class="col-lg-4">
             <h3>Level 3</h3>
             <?php
-            echo getHighScores(2, 100);
+            echo getHighScores(2, 50);
             ?>
         </div>
     </div>
